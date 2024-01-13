@@ -1,0 +1,12 @@
+# these are ignored.
+./csv_files/
+./ey_timestep_csvs/
+./build/
+./graph/
+./memos/
+./mp4/
+./pngs/
+./about_fft/
+
+*.png
+*.mp4
