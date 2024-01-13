@@ -11,3 +11,5 @@
 *.png
 *.mp4
 *.txt
+
+!CMakeLists.txt
