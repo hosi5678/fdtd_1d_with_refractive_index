@@ -7,8 +7,8 @@
 ./mp4/
 ./pngs/
 ./about_fft/
-./fdtd1d_gaussian/build
-./fdtd1d_sinwave/build
+./fdtd1d_gaussian/build/
+./fdtd1d_sinwave/build/
 
 *.png
 *.mp4
