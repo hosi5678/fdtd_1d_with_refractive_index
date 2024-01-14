@@ -27,12 +27,10 @@ double *setSinWave(int length){
    wave=checkAlloc1DDouble("sinwave set",length);
 
 	for(int time=0;time<fft_length;time++){
-		// wave[time]=I0*sin(2.0*pi*time*angular_frequency_num/(fft_length));
-		// printf("wave[%d]=%f\n",time,wave[time]);
 		wave[time]=sin(2.0*pi*time*angular_frequency_num/fft_length);
 	} 
 
-	file_name=getFilePath(csv_dir,"input_sinWave_time",csv_extension);
+	file_name=getFilePath(csv_dir,"before_fft_input_sinWave_time",csv_extension);
 
 	set1DDoubleCSV_Column(wave,file_name,fft_length);
 

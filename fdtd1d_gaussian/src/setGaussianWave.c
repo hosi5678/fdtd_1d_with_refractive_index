@@ -24,7 +24,7 @@ double *setGaussianWave(int length){
 	}
 
     char *file_path;
-    file_path=getFilePath(csv_dir,"input_gaussian_time",csv_extension);
+    file_path=getFilePath(csv_dir,"before_fft_input_gaussian_time",csv_extension);
 
     // #pragma omp parallel for
     set1DDoubleCSV_Column(gaussian,file_path,length);
@@ -37,26 +37,7 @@ double *setGaussianWave(int length){
         fft_gaussian[time]=gaussian[time];
     }
 
-    // int csv_dir_len;
-    // csv_dir_len=strlen(csv_dir);
-
-    // int func_name_len;
-    // func_name_len=strlen(__func__);
-
-    // int extension_len;
-    // extension_len=strlen("_fft.csv");
-
-    // char *file_path;
-    // file_path=(char *)calloc(csv_dir_len+func_name_len+extension_len+1,sizeof(char));
-
-    // strcat(file_path,csv_dir);
-    // strcat(file_path,__func__);
-    // strcat(file_path,"_fft.csv");
-
-
     file_path=getFilePath(csv_dir,"after_fft_gaussian_freq",csv_extension);
-
-    // printf("(in gaussian) %s\n",file_path);
 
     fft(fft_gaussian,file_path,fft_length);
 

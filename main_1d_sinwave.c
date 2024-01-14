@@ -73,7 +73,6 @@ int main(void) {
     printf("(main) gaussian peak=%d\n",gaussianPeaktimePosition);
     printf("angular frequency number=%d\n",angular_frequency_num);
 
-
     // ey initialize
     ey=checkAlloc1DDouble("ey calloc",cells);
 

@@ -2,8 +2,8 @@ import os
 import imageio
 
 # 入力と出力のパスを指定
-input_folder = 'pings'
-output_file = 'output.mp4'
+input_folder = './ey_timestep_csvs/'
+output_file = './mp4/output.mp4'
 
 # 連番のPNG画像を取得
 image_files = [f for f in os.listdir(input_folder) if f.endswith('.png')]

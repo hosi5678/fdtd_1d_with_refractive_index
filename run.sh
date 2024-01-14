@@ -7,13 +7,13 @@ directory="./csv_files"
 if [ -d "$directory" ]; then
    echo "direcory:" "$directory found"
    cd "$directory"
-   touch "test.csv"
+   touch "dummy.csv"
    cd ..
 
 else
    mkdir "$directory"
    cd "$directory"
-   touch "test.csv"
+   touch "dummy.csv"
    cd ..
 
 fi
@@ -47,13 +47,13 @@ directory="./ey_timestep_csvs/"
 if [ -d "$directory" ]; then
    echo "directory:" "$directory found"
    cd "$directory"
-   touch "test.csv"
+   touch "dummy.csv"
    cd ..
 
 else
    mkdir  "$directory"
    cd  "$directory"
-   touch "test.csv"
+   touch "dummy.csv"
    cd ..
 
 fi
