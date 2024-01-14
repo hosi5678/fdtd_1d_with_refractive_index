@@ -3,6 +3,6 @@
 /home/user/project/build/CMakeFiles/run.dir
 /home/user/project/build/CMakeFiles/edit_cache.dir
 /home/user/project/build/CMakeFiles/rebuild_cache.dir
-/home/user/project/build/fdtd1d_sinwave/CMakeFiles/fdtd1d_lib.dir
-/home/user/project/build/fdtd1d_sinwave/CMakeFiles/edit_cache.dir
-/home/user/project/build/fdtd1d_sinwave/CMakeFiles/rebuild_cache.dir
+/home/user/project/build/fdtd1d_gaussian/CMakeFiles/fdtd1d_lib.dir
+/home/user/project/build/fdtd1d_gaussian/CMakeFiles/edit_cache.dir
+/home/user/project/build/fdtd1d_gaussian/CMakeFiles/rebuild_cache.dir

@@ -11,9 +11,9 @@ set(CMAKE_BUILD_TYPE,"Debug")
 set(CMAKE_C_FLAGS_DEBUG "-g")
 
 # sub directoryの指定
-add_subdirectory(./fdtd1d_sinwave)
+add_subdirectory(./fdtd1d_gaussian)
 # targer名をmainに指定する。
-add_executable(main main_1d_sinwave.c)
+add_executable(main main_1d_gaussian.c)
 
 # sub directoryのprojectをtarget projectに付加
 target_link_libraries(main fdtd1d_lib)

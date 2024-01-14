@@ -8,5 +8,6 @@
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cmake.cpptools.compilerPath": "/usr/bin/gcc",
-    "C_Cpp.default.compilerPath": "/usr/bin/g++"
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "git.ignoreLimitWarning": true
 }

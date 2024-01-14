@@ -195,7 +195,7 @@ fdtd1d_gaussian_sub_IS_TOP_LEVEL:STATIC=OFF
 fdtd1d_gaussian_sub_SOURCE_DIR:STATIC=/home/user/project/fdtd1d_sinwave
 
 //Value Computed by CMake
-fdtd1d_lib_BINARY_DIR:STATIC=/home/user/project/build/fdtd1d_sinwave
+fdtd1d_lib_BINARY_DIR:STATIC=/home/user/project/build/fdtd1d_gaussian
 
 //Value Computed by CMake
 fdtd1d_lib_IS_TOP_LEVEL:STATIC=OFF
@@ -204,7 +204,7 @@ fdtd1d_lib_IS_TOP_LEVEL:STATIC=OFF
 fdtd1d_lib_LIB_DEPENDS:STATIC=general;m;
 
 //Value Computed by CMake
-fdtd1d_lib_SOURCE_DIR:STATIC=/home/user/project/fdtd1d_sinwave
+fdtd1d_lib_SOURCE_DIR:STATIC=/home/user/project/fdtd1d_gaussian
 
 //Value Computed by CMake
 fdtd1d_main_BINARY_DIR:STATIC=/home/user/project/build

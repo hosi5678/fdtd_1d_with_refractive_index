@@ -62,8 +62,9 @@ void memo(const double *fft_wave){
         }else{
             // write here
             fprintf(fp,"date:%s\n",now_time);
-            fprintf(fp,"sinwave\n");
+            fprintf(fp,"excitation mode:%s\n",excitation_mode);
             fprintf(fp,"cells=%d\n",cells);
+            fprintf(fp,"time margin=%f\n",time_margin);
 
             fprintf(fp,"total_calc_time=%d\n",2*gaussianPeaktimePosition+cells+fft_length);
             fprintf(fp,"fft_start_time=%d\n",2*gaussianPeaktimePosition+cells);
@@ -80,19 +81,23 @@ void memo(const double *fft_wave){
 
             fprintf(fp,"gaussian peak,amplitude\n");
 
+
+    if(strcmp(excitation_mode,"gaussian")==0){
          	int count=0;
+                        for(int i=0;i<fft_length/2-2;i++){
 
-         for(int i=0;i<fft_length/2-2;i++){
+                if(fft_wave[i+1]>fft_wave[i] && fft_wave[i+1]>fft_wave[i+2]){
+                if(count<fft_peak_number){
+                            fprintf(fp,"%d,%.15e\n",i+1,fft_wave[i+1]);
+                        count++;
+                }
 
-            if(fft_wave[i+1]>fft_wave[i] && fft_wave[i+1]>fft_wave[i+2]){
-               if(count<fft_peak_number){
-                        fprintf(fp,"%d,%.15e\n",i+1,fft_wave[i+1]);
-                     count++;
-               }
+                }
+	        }
 
-		      }
-	      }
 
+
+    }
 
             free(file_name);
             fclose(fp);

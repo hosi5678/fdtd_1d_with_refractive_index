@@ -56,15 +56,7 @@ double **set1DEyHz(
 
     } // time-loop
 
-    // for(int time=0;time<calc_time_length;time++){
-    //     printf("time=%d\n",time);
-    //     for(int x=0;x<cells;x++){
-    //         printf("%d,%f\n",x,ety_2d_plane[time][x]);
-    //     }
-    // }
 
-    // printf("(in set ey hz)ey max=%.15f\n",ey_max);
-    // printf("(in set ey hz)ey min=%.15f\n",ey_min);
     printf("(in set ey hz)(x1.1)  ey max(x1.1)=%.20f\n",ey_max*1.1);
     printf("(in set ey hz)(x1.1)  ey min(x1.1)=%.20f\n",ey_min*1.1);
 
