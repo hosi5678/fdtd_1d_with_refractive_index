@@ -4,14 +4,8 @@ cmake_minimum_required(VERSION 3.1)
 #プロジェクトの指定と言語の指定
 project(fdtd1d_main LANGUAGES C)
 
-# C 言語のコンパイラを指定 (gcc-11 を使用)
-# set(CMAKE_C_COMPILER "/usr/bin/gcc")
-
-# # C++ 言語のコンパイラを指定 (g++-11 を使用)
-# set(CMAKE_CXX_COMPILER "/usr/bin/g++-13")
-
 # Ninjaでdebugする
-set(CMAKE_BUILD_TYPE,Debug)
+set(CMAKE_BUILD_TYPE,"Debug")
 
 # Debugの設定
 set(CMAKE_C_FLAGS_DEBUG "-g")
