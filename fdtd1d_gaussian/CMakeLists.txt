@@ -1,5 +1,5 @@
 # cmakeのversion 指定
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.1)
 
 # projectと言語の設定
 project(fdtd1d_lib LANGUAGES C)
@@ -14,7 +14,7 @@ file(GLOB_RECURSE SOURCES "./src/*.c")
 add_library(fdtd1d_lib STATIC ${SOURCES})
 
 # include files(header files)をtargetに付加
-target_include_directories(fdtd1d_lib INTERFACE ./include)
+target_include_directories(fdtd1d_lib INTERFACE ../common_include)
 
 # math.hをtargetに付加
 target_link_libraries(fdtd1d_lib m)

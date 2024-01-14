@@ -22,6 +22,9 @@
 
 #define cells 55
 
+#define excitation_mode "gaussian"
+//  #define excitation_mode "sin"
+
 #define gaussianPeaktimePosition 100 
 
 #define gaussian_alpha 0.01
