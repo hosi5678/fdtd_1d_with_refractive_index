@@ -25,15 +25,19 @@
 #include "./common_include/set1DDoubleCSV_Column.h"
 #include "./common_include/fft.h"
 #include "./common_include/getPeak.h"
-#include "./common_include/memo.h"
+#include "./common_include/sinwave_memo.h"
 
-int main(void) {
+int main(int argc,char **argv) {
 
     time_t start_clock, end_clock;
 
     start_clock = clock();
 
     double dt;
+
+    printf("argc=%d,argv=%s\n",argc,argv[1]);
+
+    const int angular_frequency_num=atoi(argv[1]);
 
     // not setting time margin(couse 1D)
     dt =(dx/(sqrt(dimension)*light_speed))*time_margin;
@@ -102,8 +106,7 @@ int main(void) {
     sigma=setSigma(cells);
 
     // exciteWave=setGaussianWave(calculation_timestep);
-    exciteWave=setSinWave(calculation_timestep);
-
+    exciteWave=setSinWave(angular_frequency_num,calculation_timestep);
 
     coef1=setCoef1(eps,sigma,cells);
     coef2=setCoef2(eps,sigma,cells);
@@ -134,42 +137,42 @@ int main(void) {
 
     set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",fft_timestep_end);
 
-    // fft calculation , array allocation
-    double *fft_array;
-    fft_array=checkAlloc1DDouble("in main fft alloc",fft_length);
+    // // fft calculation , array allocation
+    // double *fft_array;
+    // fft_array=checkAlloc1DDouble("in main fft alloc",fft_length);
 
-    // data copy
-    for(int time=fft_timestep_start;time<fft_timestep_start+fft_length;time++){
+    // // data copy
+    // for(int time=fft_timestep_start;time<fft_timestep_start+fft_length;time++){
 
-        for(int x=0;x<cells;x++){
-            if(x==excite_point){
-                fft_array[time-fft_timestep_start]=ety_2d_plane[time][x];
-            }
+    //     for(int x=0;x<cells;x++){
+    //         if(x==excite_point){
+    //             fft_array[time-fft_timestep_start]=ety_2d_plane[time][x];
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
-    // fft_processing
+    // // fft_processing
 
-    const double *fft_wave;
+    // const double *fft_wave;
 
-    file_name=getFilePath(csv_dir,"before_fft_eyt_time",csv_extension);
+    // file_name=getFilePath(csv_dir,"before_fft_eyt_time",csv_extension);
 
-    // set csv value
-    set1DDoubleCSV_Column(fft_array,file_name,fft_length);
+    // // set csv value
+    // set1DDoubleCSV_Column(fft_array,file_name,fft_length);
 
-    file_name=getFilePath(csv_dir,"after_fft_eyt_freq",csv_extension);
+    // file_name=getFilePath(csv_dir,"after_fft_eyt_freq",csv_extension);
 
-    fft_wave=fft(fft_array,file_name,fft_length);
+    // fft_wave=fft(fft_array,file_name,fft_length);
 
-    file_name=getFilePath(csv_dir,"getPeak_of_fft",csv_extension);
+    // file_name=getFilePath(csv_dir,"getPeak_of_fft",csv_extension);
 
-    getPeak(fft_wave,file_name,fft_length);
+    // getPeak(fft_wave,file_name,fft_length);
 
     // printf("func_name=%s,length=%ld\n",__func__,strlen(__func__));
     // printf("csv_dir=%s\n",csv_dir);
 
-    memo(fft_wave);
+    sinwave_memo(angular_frequency_num);
 
     free(eps);
     free(sigma);
@@ -181,8 +184,6 @@ int main(void) {
 
     free(exciteWave);
     free(ety_2d_plane);
-    free(fft_array);
-    free(file_name);
 
     end_clock = clock();
 

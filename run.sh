@@ -21,7 +21,7 @@ fi
 if [ -d "$directory" ]; then
    cd "$directory"
 
-   csv_files=$(ls *.csv 2>/dev/null)
+   # csv_files=$(ls *.csv 2>/dev/null)
 
    # echo "$csv_files"
 
@@ -60,7 +60,7 @@ fi
 
 if [ -d "$directory" ]; then
    cd "$directory"
-   csv_files=$(ls *.csv 2>/dev/null)
+   # csv_files=$(ls *.csv 2>/dev/null)
    # echo "$csv_files"
 
    if [ -n "$directory" ]; then
@@ -77,6 +77,21 @@ else
 fi
 
 cd ..
+
+# CMakeLists.txtでgaussianとsinの切り替えを行うので、./build/を一旦削除する
+
+directory="./build/"
+
+if [ -d "$directory" ]; then
+   echo "directory:" "$directory found"
+   rm -rf "$directory"
+   echo "directory:" "$directory" " was deleted."
+
+   mkdir "$directory"
+
+else
+   mkdir  "$directory"
+fi
 
 cmake -B ./build -G Ninja
 cd ./build

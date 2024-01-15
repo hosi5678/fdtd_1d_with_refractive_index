@@ -22,16 +22,14 @@
 
 #define cells 55
 
-#define excitation_mode "gaussian"
-//  #define excitation_mode "sin"
-
 #define gaussianPeaktimePosition 100 
 
 #define gaussian_alpha 0.01
 
 #define pulseAmplitude 1.0
 
-#define angular_frequency_num 759 // 152,455,759,1062
+/* #define angular_frequency_num 455 */
+// 152,455,759,1062
 
 #define refractive_index 3.0
 

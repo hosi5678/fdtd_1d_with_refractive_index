@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 # projectと言語の設定
-project(fdtd1d_lib LANGUAGES C)
+project(fdtd1d_lib_sinwave LANGUAGES C)
 
 # set(CMAKE_C_COMPILER "/usr/bin/gcc-13")
 
@@ -10,13 +10,13 @@ project(fdtd1d_lib LANGUAGES C)
 file(GLOB_RECURSE SOURCES "./src/*.c")
 
 # target名を決定し、source filesをtargetに付加
-add_library(fdtd1d_lib STATIC ${SOURCES})
+add_library(fdtd1d_lib_sinwave STATIC ${SOURCES})
 
 # include files(header files)をtargetに付加
-target_include_directories(fdtd1d_lib INTERFACE ./include)
+target_include_directories(fdtd1d_lib_sinwave INTERFACE ./include)
 
 # math.hをtargetに付加
-target_link_libraries(fdtd1d_lib m)
+target_link_libraries(fdtd1d_lib_sinwave m)
 
 # opengl用
 # target_link_libraries(ftdt1d_gaussian GL)

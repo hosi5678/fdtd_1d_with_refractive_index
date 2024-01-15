@@ -25,7 +25,7 @@
 #include "./common_include/set1DDoubleCSV_Column.h"
 #include "./common_include/fft.h"
 #include "./common_include/getPeak.h"
-#include "./common_include/memo.h"
+#include "./common_include/gaussian_memo.h"
 
 int main(void) {
 
@@ -71,8 +71,6 @@ int main(void) {
     printf("(main) fft length=%d\n",fft_length);
     printf("(main) calc timestep=%d\n",calculation_timestep);
     printf("(main) gaussian peak=%d\n",gaussianPeaktimePosition);
-    printf("angular frequency number=%d\n",angular_frequency_num);
-
 
     // ey initialize
     ey=checkAlloc1DDouble("ey calloc",cells);
@@ -98,19 +96,11 @@ int main(void) {
     // coef3 initialize
     coef3=checkAlloc1DDouble("coef3",cells);
 
-
-    // printf("(main) cells=%d\n", cells);
-
-    // printf("(main) dx=%.5e\n", dx);
-    // printf("(main) dt=%.5e\n", dt);
-    // printf("(main) time margin=%f\n", time_margin);
-
     eps=setEps(cells);
     sigma=setSigma(cells);
 
     // exciteWave=setGaussianWave(calculation_timestep);
     exciteWave=setGaussianWave(calculation_timestep);
-
 
     coef1=setCoef1(eps,sigma,cells);
     coef2=setCoef2(eps,sigma,cells);
@@ -176,7 +166,7 @@ int main(void) {
     // printf("func_name=%s,length=%ld\n",__func__,strlen(__func__));
     // printf("csv_dir=%s\n",csv_dir);
 
-    memo(fft_wave);
+    gaussian_memo(fft_wave);
 
     free(eps);
     free(sigma);

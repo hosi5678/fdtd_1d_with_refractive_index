@@ -11,18 +11,15 @@
 #include "../../common_include/fft.h"
 #include "../../common_include/getPeak.h"
 
-double *setSinWave(int length){
-
-	// usage :
-	// length　データの長さ
-	// angular frequency 角周波数、あるいは波長の数
-	// usage(in main): setSinWave(16384,5);
+double *setSinWave(int angular_frequency_num,int length){
 
 	double *wave;
 
 	char *file_name;
 
    double I0=pulseAmplitude;
+
+   printf("sin wave selected.\n");
 
    wave=checkAlloc1DDouble("sinwave set",length);
 
@@ -34,19 +31,13 @@ double *setSinWave(int length){
 
 	set1DDoubleCSV_Column(wave,file_name,fft_length);
 
-	file_name=getFilePath(csv_dir,"after_fft_sinwave_freq",csv_extension);
-
 	const double *fft_wave;
 
 	fft_wave=fft(wave,file_name,fft_length);
 
-	file_name=getFilePath(csv_dir,"getPeak_of_fft",csv_extension);
+	file_name=getFilePath(csv_dir,"after_fft_sinwave_freq",csv_extension);
 
-	getPeak(fft_wave,file_name,fft_length/2);
-
-
-	// file_name=getFilePath(csv_dir,"input_sinWave_fft_freq",csv_extension);
-
+	set1DDoubleCSV_Column(fft_wave,file_name,fft_length);
 
 	return wave;
 

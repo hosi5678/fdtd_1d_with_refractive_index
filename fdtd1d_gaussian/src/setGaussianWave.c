@@ -16,6 +16,8 @@ double *setGaussianWave(int length){
 
     double I0=pulseAmplitude;
 
+    printf("gaussian pulse selected.\n");
+
     gaussian=checkAlloc1DDouble("in gaussian",length);
 
     // #pragma omp parallel for
