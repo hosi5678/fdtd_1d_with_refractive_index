@@ -14,5 +14,6 @@
 *.mp4
 *.txt
 *.json
+*.csv
 
 !CMakeLists.txt
