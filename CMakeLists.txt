@@ -5,14 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 project(fdtd1d_main LANGUAGES C)
 
 # Ninjaでdebugする
-set(CMAKE_BUILD_TYPE,"Debug")
+set(CMAKE_BUILD_TYPE  "Debug")
 
 # Debugの設定
 set(CMAKE_C_FLAGS_DEBUG "-g")
 
 # 変数 excitation_mode を設定
+
 # set(excitation_mode "gaussian" CACHE STRING "Excitation mode: gaussian or sin")
 set(excitation_mode "sin" CACHE STRING "Excitation mode: gaussian or sin")
+
+# Angular Frequency Number を設定
+set(angular_frequency_num "759" CACHE INTERNAL "Angular Frequency Number")
 
 # excitation_mode に応じてサブディレクトリと実行ファイルを追加
 if(excitation_mode STREQUAL "gaussian")
@@ -22,9 +26,8 @@ if(excitation_mode STREQUAL "gaussian")
 
 elseif(excitation_mode STREQUAL "sin")
     add_subdirectory(./fdtd1d_sinwave)
-    add_executable(main main_1d_sinwave.c)
+    add_executable(main main_1d_sinwave.c )
     target_link_libraries(main fdtd1d_lib_sinwave)
-    set(angular_frequency_num "759")
 
 else()
     message("Invalid excitation_mode specified. Use 'gaussian' or 'sin'.")
@@ -64,8 +67,6 @@ target_compile_options(main PRIVATE -fopenmp)
 
 # math.hを使用するためのライブラリのリンク
 target_link_libraries(main m)
-
-message("angular_frequency_num=" ${angular_frequency_num})
 
 # カスタムターゲットの定義
 add_custom_target(run_main
