@@ -62,6 +62,8 @@ void gaussian_memo(const double *fft_wave){
             fprintf(fp,"gaussian pulse\n");
             fprintf(fp,"cells=%d\n",cells);
 
+            fprintf(fp,"time margin=%f\n",time_margin);
+
             fprintf(fp,"total_calc_time=%d\n",2*gaussianPeaktimePosition+cells+fft_length);
             fprintf(fp,"fft_start_time=%d\n",2*gaussianPeaktimePosition+cells);
             fprintf(fp,"fft_length=%d\n",fft_length);
@@ -74,7 +76,7 @@ void gaussian_memo(const double *fft_wave){
 
             double dt=dx/light_speed;
 
-            fprintf(fp,"%f\n",dt);
+            fprintf(fp,"dt=%.40f\n",dt);
 
             fprintf(fp,"gaussian peak,amplitude\n");
 

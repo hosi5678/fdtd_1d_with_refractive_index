@@ -33,22 +33,8 @@ int main(void) {
 
     start_clock = clock();
 
-    double dt;
+    double dt =(dx/(sqrt(dimension)*light_speed))*time_margin;
 
-    // not setting time margin(couse 1D)
-    dt =(dx/(sqrt(dimension)*light_speed))*time_margin;
-
-    double *sigma;
-    double *eps;
-
-    double *coef1;
-    double *coef2;
-    double *coef3;
-
-    double *ey;
-    double *hz;
-
-    double **ety_2d_plane;
     double const *const *ety_const_2d_plane;
     double *exciteWave;
 
@@ -72,58 +58,19 @@ int main(void) {
     printf("(main) calc timestep=%d\n",calculation_timestep);
     printf("(main) gaussian peak=%d\n",gaussianPeaktimePosition);
 
-    // ey initialize
-    ey=checkAlloc1DDouble("ey calloc",cells);
-
-    // hz initialize
-    hz=checkAlloc1DDouble("hz calloc",cells-1);
-
     // wave initialize
     exciteWave=checkAlloc1DDouble("excite wave",calculation_timestep);
 
-    // eps initialize
-    eps=checkAlloc1DDouble("eps",cells);
-
-    // sigma initialize
-    sigma=checkAlloc1DDouble("sigma",cells);
-
-    // coef1 initialize
-    coef1=checkAlloc1DDouble("coef1",cells);
-
-    // coef2 initialize
-    coef2=checkAlloc1DDouble("coef2",cells);
-
-    // coef3 initialize
-    coef3=checkAlloc1DDouble("coef3",cells);
-
-    eps=setEps(cells);
-    sigma=setSigma(cells);
-
-    // exciteWave=setGaussianWave(calculation_timestep);
     exciteWave=setGaussianWave(calculation_timestep);
 
-    coef1=setCoef1(eps,sigma,cells);
-    coef2=setCoef2(eps,sigma,cells);
-    coef3=setCoef3(eps,sigma,cells);
-
-    double coef4;
-
-    coef4=dt/(u0*dx);
-
     // 1 dimensional fdtd calculation
-    ety_2d_plane=set1DEyHz(
-        coef1,
-        coef2,
-        coef3,
-        coef4,
-        ey,
-        hz,
-        exciteWave,
-        excite_point,
-        calculation_timestep
+    ety_const_2d_plane=set1DEyHz(
+       cells,
+       calculation_timestep,
+       exciteWave,
+       excite_point,
+       dt
     );
-
-    ety_const_2d_plane=(double const *const *)ety_2d_plane;
 
     file_name=getFilePath(csv_dir,"eyt_plane_2d",csv_extension);
 
@@ -140,7 +87,7 @@ int main(void) {
 
         for(int x=0;x<cells;x++){
             if(x==excite_point){
-                fft_array[time-fft_timestep_start]=ety_2d_plane[time][x];
+                fft_array[time-fft_timestep_start]=ety_const_2d_plane[time][x];
             }
 
         }
@@ -163,21 +110,9 @@ int main(void) {
 
     getPeak(fft_wave,file_name,fft_length);
 
-    // printf("func_name=%s,length=%ld\n",__func__,strlen(__func__));
-    // printf("csv_dir=%s\n",csv_dir);
-
     gaussian_memo(fft_wave);
 
-    free(eps);
-    free(sigma);
-    free(coef1);
-    free(coef2);
-    free(coef3);
-    free(hz);
-    free(ey);
-
     free(exciteWave);
-    free(ety_2d_plane);
     free(fft_array);
     free(file_name);
 

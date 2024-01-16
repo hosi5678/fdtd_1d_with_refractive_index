@@ -5,32 +5,57 @@
 #include "../../common_include/init2DdoublePlane.h"
 #include "../../common_include/symmetryCheck.h"
 #include "../../common_include/antisymmetryCheck.h"
+#include "../../common_include/checkAlloc1DDouble.h"
 
-double **set1DEyHz(
-    double *coef1,
-    double *coef2,
-    double *coef3,
-    double coef4,
-    double *ey,
-    double *hz,
+#include "../../common_include/setEps.h"
+#include "../../common_include/setSigma.h"
+#include "../../common_include/setCoef1.h"
+#include "../../common_include/setCoef2.h"
+#include "../../common_include/setCoef3.h"
+
+#include "../../common_include/set1DEyHz.h"
+
+const double * const *set1DEyHz(
+    int x_length,
+    int time_length,
     double *src_J,
     int excite_point,
-    int calc_time_length
+    double dt
+
 ) {
 
-    
+    double *sigma,*eps;
+    double *coef1,*coef2,*coef3;
+
+    double *ey,*hz;
+
+    eps=setEps(x_length);
+    sigma=setSigma(x_length);
+
+    coef1=setCoef1(eps,sigma,dt,x_length);
+    coef2=setCoef2(eps,sigma,dt,x_length);
+    coef3=setCoef3(eps,sigma,dt,x_length);
+
+        // ey initialize
+    ey=checkAlloc1DDouble("ey calloc",x_length);
+
+    // hz initialize
+    hz=checkAlloc1DDouble("hz calloc",x_length-1);
+
+    double coef4=dt/(u0*dx);
+
     double ey_max=0.0;
     double ey_min=0.0;
 
-    static double **ety_2d_plane;
+    double **ety_2d_plane;
 
-    ety_2d_plane=init2DdoublePlane(calc_time_length,cells);
+    ety_2d_plane=init2DdoublePlane(time_length,cells);
 
-        for (int time=0; time < calc_time_length; time++) {
+        for (int time=0; time < time_length; time++) {
 
-        double J;
+            double J;
 
-        for ( int x = 1; x < cells-1 ; x++ ) {
+        for ( int x = 1; x < x_length-1 ; x++ ) {
             if(x==excite_point) {
                 J=src_J[time];
             }else{
@@ -41,33 +66,32 @@ double **set1DEyHz(
 
         }
 
-        for(int x=0;x<cells-1;x++){
+        for(int x=0;x<x_length-1;x++){
             hz[x]=hz[x]-coef4*(ey[x+1]-ey[x]);
         }
 
-        for(int x=0;x<cells;x++){
+        for(int x=0;x<x_length;x++){
             ety_2d_plane[time][x]=ey[x];
             if(ey[x]>ey_max) ey_max=ey[x];
             if(ey_min>ey[x]) ey_min=ey[x];
         }
 
-        // symmetryCheck(ey,cells,time);
-        // antisymmetryCheck(hz,cells-1,time);
+        symmetryCheck(ey,x_length,time);
+        antisymmetryCheck(hz,x_length-1,time);
 
     } // time-loop
 
-    // for(int time=0;time<calc_time_length;time++){
-    //     printf("time=%d\n",time);
-    //     for(int x=0;x<cells;x++){
-    //         printf("%d,%f\n",x,ety_2d_plane[time][x]);
-    //     }
-    // }
+    printf("(ey max)(x1.1)  ey max=%.15f\n",ey_max*1.1);
+    printf("(ey min)(x1.1)  ey min=%.15f\n",ey_min*1.1);
 
-    // printf("(in set ey hz)ey max=%.15f\n",ey_max);
-    // printf("(in set ey hz)ey min=%.15f\n",ey_min);
-    printf("(in set ey hz)(x1.1)  ey max=%.15f\n",ey_max*1.1);
-    printf("(in set ey hz)(x1.1)  ey min=%.15f\n",ey_min*1.1);
+    free(eps);
+    free(sigma);
+    free(coef1);
+    free(coef2);
+    free(coef3);
+    free(hz);
+    free(ey);
 
-    return ety_2d_plane;
+    return (const double * const *)ety_2d_plane;
 
 }

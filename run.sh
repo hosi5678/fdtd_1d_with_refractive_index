@@ -21,10 +21,6 @@ fi
 if [ -d "$directory" ]; then
    cd "$directory"
 
-   # csv_files=$(ls *.csv 2>/dev/null)
-
-   # echo "$csv_files"
-
 # 文字列が空でないかどうか,-nは文字列が "non-zero"、
 # つまり空でない場合に真（true）となる。
    if [ -n "$directory" ]; then
@@ -74,6 +70,22 @@ if [ -d "$directory" ]; then
 else
    echo "Error. $directory directory not found."
    exit 1
+fi
+
+cd ..
+
+directory="./mp4/"
+
+if [ -d "$directory" ]; then
+   echo "directory:" "$directory found"
+
+   cd "$directory"
+
+   rm *.mp4
+
+else
+   mkdir "$directory"
+
 fi
 
 cd ..

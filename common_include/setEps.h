@@ -1,6 +1,6 @@
 #ifndef BBB973BF_F921_4FE2_AA45_31101401833E
 #define BBB973BF_F921_4FE2_AA45_31101401833E
 
-double *setEps(int length);
+double *setEps(int x_length);
 
 #endif /* BBB973BF_F921_4FE2_AA45_31101401833E */

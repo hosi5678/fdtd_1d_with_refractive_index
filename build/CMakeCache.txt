@@ -20,14 +20,12 @@ CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
-//No help, variable specified on the command line.
-CMAKE_BUILD_TYPE:STRING=Debug
+//Choose the type of build, options are: None Debug Release RelWithDebInfo
+// MinSizeRel ...
+CMAKE_BUILD_TYPE:STRING=
 
-//No help, variable specified on the command line.
-CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++-11
-
-//No help, variable specified on the command line.
-CMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc-11
+//C compiler
+CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -70,8 +68,8 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
 //Flags used by the linker during RELWITHDEBINFO builds.
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
-//No help, variable specified on the command line.
-CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
+//Enable/Disable output of compile commands during generation.
+CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
 
 //Value Computed by CMake.
 CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=/home/user/project/build/CMakeFiles/pkgRedirects
@@ -189,19 +187,19 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Excitation mode: gaussian or sin
-excitation_mode:STRING=sin
+excitation_mode:STRING=gaussian
 
 //Value Computed by CMake
-fdtd1d_lib_sinwave_BINARY_DIR:STATIC=/home/user/project/build/fdtd1d_sinwave
+fdtd1d_lib_gaussian_BINARY_DIR:STATIC=/home/user/project/build/fdtd1d_gaussian
 
 //Value Computed by CMake
-fdtd1d_lib_sinwave_IS_TOP_LEVEL:STATIC=OFF
+fdtd1d_lib_gaussian_IS_TOP_LEVEL:STATIC=OFF
 
 //Dependencies for the target
-fdtd1d_lib_sinwave_LIB_DEPENDS:STATIC=general;m;
+fdtd1d_lib_gaussian_LIB_DEPENDS:STATIC=general;m;
 
 //Value Computed by CMake
-fdtd1d_lib_sinwave_SOURCE_DIR:STATIC=/home/user/project/fdtd1d_sinwave
+fdtd1d_lib_gaussian_SOURCE_DIR:STATIC=/home/user/project/fdtd1d_gaussian
 
 //Value Computed by CMake
 fdtd1d_main_BINARY_DIR:STATIC=/home/user/project/build

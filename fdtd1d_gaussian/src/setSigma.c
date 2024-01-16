@@ -3,19 +3,15 @@
 
 #include "../../common_include/setSigma.h"
 #include "../../common_include/common_parameter.h"
+#include "../../common_include/checkAlloc1DDouble.h"
 
-double *setSigma(int length){
+double *setSigma(int x_length){
 
     double *sigma;
 
-    sigma=(double *)calloc(length,sizeof(double));
+    sigma=checkAlloc1DDouble("sigma",x_length);
 
-    if(NULL==sigma){
-        printf("can't allocate sigma.\n");
-        exit(1);
-    }
-
-    for(int i=0;i<length;i++){
+    for(int i=0;i<x_length;i++){
         sigma[i]=0.0;
     }
 
