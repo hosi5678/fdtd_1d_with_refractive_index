@@ -187,19 +187,19 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Excitation mode: gaussian or sin
-excitation_mode:STRING=gaussian
+excitation_mode:STRING=sin
 
 //Value Computed by CMake
-fdtd1d_lib_gaussian_BINARY_DIR:STATIC=/home/user/project/build/fdtd1d_gaussian
+fdtd1d_lib_sinwave_BINARY_DIR:STATIC=/home/user/project/build/fdtd1d_sinwave
 
 //Value Computed by CMake
-fdtd1d_lib_gaussian_IS_TOP_LEVEL:STATIC=OFF
+fdtd1d_lib_sinwave_IS_TOP_LEVEL:STATIC=OFF
 
 //Dependencies for the target
-fdtd1d_lib_gaussian_LIB_DEPENDS:STATIC=general;m;
+fdtd1d_lib_sinwave_LIB_DEPENDS:STATIC=general;m;
 
 //Value Computed by CMake
-fdtd1d_lib_gaussian_SOURCE_DIR:STATIC=/home/user/project/fdtd1d_gaussian
+fdtd1d_lib_sinwave_SOURCE_DIR:STATIC=/home/user/project/fdtd1d_sinwave
 
 //Value Computed by CMake
 fdtd1d_main_BINARY_DIR:STATIC=/home/user/project/build
@@ -345,5 +345,5 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //angular frequency number
-angular_frequency_num:INTERNAL=759
+angular_frequency_num:INTERNAL=455
 

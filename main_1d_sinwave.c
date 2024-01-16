@@ -9,22 +9,12 @@
 
 // 定数の設定
 #include "./common_include/common_parameter.h"
-#include "./common_include/checkAlloc1DDouble.h"
 #include "./common_include/init2DdoublePlane.h"
-#include "./common_include/setEps.h"
-#include "./common_include/setSigma.h"
-#include "./common_include/setCoef1.h"
-#include "./common_include/setCoef2.h"
-#include "./common_include/setCoef3.h"
 #include "./common_include/getFilePath.h"
 #include "./common_include/setSinWave.h"
-#include "./common_include/setGaussianWave.h"
 #include "./common_include/set1DEyHz.h"
 #include "./common_include/setEtyCSV.h"
 #include "./common_include/set_ey_timestep_csv.h"
-#include "./common_include/set1DDoubleCSV_Column.h"
-#include "./common_include/fft.h"
-#include "./common_include/getPeak.h"
 #include "./common_include/sinwave_memo.h"
 
 int main(int argc,char **argv) {
@@ -56,7 +46,6 @@ int main(int argc,char **argv) {
     printf("angular frequency number=%d\n",angular_frequency_num);
 
     // wave initialize
-    exciteWave=checkAlloc1DDouble("excite wave",calculation_timestep);
 
     exciteWave=setSinWave(angular_frequency_num,calculation_timestep);
 
@@ -68,7 +57,6 @@ int main(int argc,char **argv) {
         excite_point,
         dt
     );
-
 
     file_name=getFilePath(csv_dir,"eyt_plane_2d",csv_extension);
 

@@ -24,7 +24,7 @@ timestep = count_csv_files(csv_dir)
 
 print(str(timestep)+" csv files were found.")
 
-max=0.000090 #sin
+max=0.00050 #sin
 
 # max=0.000010360083626 # gaussian
 
