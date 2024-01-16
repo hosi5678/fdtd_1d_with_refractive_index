@@ -24,7 +24,9 @@ timestep = count_csv_files(csv_dir)
 
 print(str(timestep)+" csv files were found.")
 
-max=0.000090
+max=0.000090 #sin
+
+max=0.000010360083626 # gaussian
 
 min=-max
 
@@ -90,7 +92,7 @@ for i in range(timestep):
     plt.savefig(png_dir+"png_"+fmt_i+".png")
     
     # saveの表示
-    print(png_dir+"png_"+fmt_i+".png"+"/"+str(timestep)+" was saved.")
+    print(png_dir+"png_"+fmt_i+".png"+"/"+str(timestep)+" was created.")
     
     # csv fileの削除
     os.unlink(csv_file)
