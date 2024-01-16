@@ -15,7 +15,7 @@
 
 #include "../../common_include/set1DEyHz.h"
 
-const double * const *set1DEyHz(
+double const * const *set1DEyHz(
     int x_length,
     int time_length,
     double *src_J,
@@ -35,14 +35,13 @@ const double * const *set1DEyHz(
     coef1=setCoef1(eps,sigma,dt,x_length);
     coef2=setCoef2(eps,sigma,dt,x_length);
     coef3=setCoef3(eps,sigma,dt,x_length);
+    double coef4=dt/(u0*dx);
 
         // ey initialize
     ey=checkAlloc1DDouble("ey calloc",x_length);
 
     // hz initialize
     hz=checkAlloc1DDouble("hz calloc",x_length-1);
-
-    double coef4=dt/(u0*dx);
 
     double ey_max=0.0;
     double ey_min=0.0;
@@ -53,7 +52,7 @@ const double * const *set1DEyHz(
 
         for (int time=0; time < time_length; time++) {
 
-            double J;
+        double J;
 
         for ( int x = 1; x < x_length-1 ; x++ ) {
             if(x==excite_point) {
@@ -92,6 +91,6 @@ const double * const *set1DEyHz(
     free(hz);
     free(ey);
 
-    return (const double * const *)ety_2d_plane;
+    return (double const * const *)ety_2d_plane;
 
 }

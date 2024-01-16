@@ -19,19 +19,18 @@
 
 int main(int argc,char **argv) {
 
+    printf("Sin Wave Excitation.\n");
+
     time_t start_clock, end_clock;
 
     start_clock = clock();
 
-    double dt;
+    double dt==(dx/(sqrt(dimension)*light_speed))*time_margin;
 
     printf("argc=%d,argv=%s\n",argc,argv[1]);
 
     const int angular_frequency_num=atoi(argv[1]);
-
-    // not setting time margin(cause 1D)
-    dt =(dx/(sqrt(dimension)*light_speed))*time_margin;
-
+    
     double const * const *ety_const_2d_plane;
     double *exciteWave;
 
@@ -46,7 +45,6 @@ int main(int argc,char **argv) {
     printf("angular frequency number=%d\n",angular_frequency_num);
 
     // wave initialize
-
     exciteWave=setSinWave(angular_frequency_num,calculation_timestep);
 
     // 1 dimensional fdtd calculation

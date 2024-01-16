@@ -22,6 +22,8 @@
 
 int main(void) {
 
+    printf("Gaussian Pulse Excitation.\n");
+
     time_t start_clock, end_clock;
 
     start_clock = clock();
@@ -33,18 +35,12 @@ int main(void) {
 
     char *file_name;
 
-    int excite_point;
+    int excite_point=(cells-1)/2;
 
-    excite_point=(cells-1)/2;
+    int fft_timestep_start=2*gaussianPeaktimePosition+cells;
+    int fft_timestep_end=fft_timestep_start+fft_length;
 
-    int fft_timestep_start;
-    int fft_timestep_end;
-
-    fft_timestep_start=2*gaussianPeaktimePosition+cells;
-    fft_timestep_end=fft_timestep_start+fft_length;
-
-    int calculation_timestep;
-    calculation_timestep=fft_timestep_end;
+    int calculation_timestep=fft_timestep_end;
 
     printf("(main) cells=%d\n",cells);
     printf("(main) fft length=%d\n",fft_length);
@@ -69,11 +65,10 @@ int main(void) {
 
     setEtyCSV(ety_const_2d_plane,file_name,fft_timestep_end);
 
-    set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",fft_timestep_end);
+    set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",calculation_timestep);
 
     // fft calculation , array allocation
-    double *fft_array;
-    fft_array=checkAlloc1DDouble("in main fft alloc",fft_length);
+    double *fft_array=checkAlloc1DDouble("in main fft alloc",fft_length);
 
     // data copy
     for(int time=fft_timestep_start;time<fft_timestep_start+fft_length;time++){
@@ -88,8 +83,6 @@ int main(void) {
 
     // fft_processing
 
-    const double *fft_wave;
-
     file_name=getFilePath(csv_dir,"before_fft_eyt_time",csv_extension);
 
     // set csv value
@@ -97,7 +90,7 @@ int main(void) {
 
     file_name=getFilePath(csv_dir,"after_fft_eyt_freq",csv_extension);
 
-    fft_wave=fft(fft_array,file_name,fft_length);
+    const double *fft_wave=fft(fft_array,file_name,fft_length);
 
     file_name=getFilePath(csv_dir,"getPeak_of_fft",csv_extension);
 
