@@ -26,7 +26,7 @@ print(str(timestep)+" csv files were found.")
 
 max=0.000090 #sin
 
-max=0.000010360083626 # gaussian
+# max=0.000010360083626 # gaussian
 
 min=-max
 

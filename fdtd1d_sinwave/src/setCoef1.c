@@ -2,34 +2,20 @@
 #include <stdlib.h>
 
 #include "../../common_include/common_parameter.h"
+#include "../../common_include/checkAlloc1DDouble.h"
 #include "../../common_include/setCoef1.h"
 
-double *setCoef1(double *eps,double *sigma,int length){
+double *setCoef1(double *eps,double *sigma,double dt,int x_length){
 
-    double *coef;
-    double dt;
+    double *coef1;
 
     dt=(dx/light_speed)*time_margin;
 
-    coef=(double *)calloc(length,sizeof(double));
+    coef1=checkAlloc1DDouble("coef1",x_length);
 
-    if(NULL==coef){
-        printf("can't alloc error coef1.\n");
-        exit(1);
+    for(int x=0;x<x_length;x++){
+        coef1[x]=(2.0*eps[x]-sigma[x]*dt)/(2.0*eps[x]+sigma[x]*dt);
     }
 
-    if(dt==dx/light_speed){
-        // printf("margin error.\n");
-        // exit(1);
-    }
-
-    for(int x=0;x<length;x++){
-        coef[x]=(2.0*eps[x]-sigma[x]*dt)/(2.0*eps[x]+sigma[x]*dt);
-    }
-
-    // for(int x=0;x<length;x++){
-    //     printf("coef1[%d]=%f\n",x,coef[x]);
-    // }
-
-    return coef;
+    return coef1;
 }
