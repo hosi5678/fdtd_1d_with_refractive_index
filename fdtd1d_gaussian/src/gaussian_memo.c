@@ -74,7 +74,9 @@ void gaussian_memo(const double *fft_wave){
 
             fprintf(fp,"dx=%.15f\n",dx);
 
-            double dt=dx/light_speed;
+            fprintf(fp,"light speed=%f\n",light_speed);
+
+            double dt=dx*time_margin/light_speed;
 
             fprintf(fp,"dt=%.40f\n",dt);
 

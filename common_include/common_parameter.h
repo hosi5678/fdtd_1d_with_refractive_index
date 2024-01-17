@@ -8,10 +8,11 @@
 #define u0 1.25663706212e-6
 
 #define light_speed 2.99792458e8
+// #define light_speed 3.0e8
 
 #define dimension 1
 
-#define dx 25e-9
+#define dx 25e-9 // 25e-9
 #define time_margin 1.0
 
 #define cu_sigma 64.5e6
@@ -24,7 +25,7 @@
 
 #define gaussianPeaktimePosition 100 
 
-#define gaussian_alpha 0.01
+#define gaussian_alpha 0.05
 
 #define pulseAmplitude 1.0
 
