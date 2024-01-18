@@ -15,7 +15,7 @@
 #include "./common_include/set1DEyHz.h"
 #include "./common_include/setEtyCSV.h"
 #include "./common_include/set_ey_timestep_csv.h"
-#include "./common_include/sinwave_memo.h"
+#include "./common_include/memo_sinwave.h"
 
 int main(int argc,char **argv) {
 
@@ -25,7 +25,7 @@ int main(int argc,char **argv) {
 
     start_clock = clock();
 
-    double dt==(dx/(sqrt(dimension)*light_speed))*time_margin;
+    double dt=(dx/(sqrt(dimension)*light_speed))*time_margin;
 
     printf("argc=%d,argv=%s\n",argc,argv[1]);
 
@@ -62,7 +62,7 @@ int main(int argc,char **argv) {
 
     set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",fft_length);
 
-    sinwave_memo(angular_frequency_num);
+    memo_sinwave(angular_frequency_num);
 
     free(exciteWave);
 

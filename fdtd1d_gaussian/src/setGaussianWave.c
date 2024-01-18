@@ -4,12 +4,14 @@
 #include <math.h>
 
 #include "../../common_include/common_parameter.h"
-#include "../../common_include/setGaussianWave.h"
 #include "../../common_include/set1DDoubleCSV_Column.h"
 #include "../../common_include/checkAlloc1DDouble.h"
 #include "../../common_include/getFilePath.h"
 #include "../../common_include/fft.h"
 #include "../../common_include/dft.h"
+
+#include "../include/setGaussianWave.h"
+
 
 double *setGaussianWave(int length){
 

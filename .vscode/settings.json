@@ -5,7 +5,8 @@
         "const.h": "c",
         "dft.h": "c",
         "checkalloc1ddouble.h": "c",
-        "setcoef2.h": "c"
+        "setcoef2.h": "c",
+        "fft.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cmake.cpptools.compilerPath": "/usr/bin/gcc",

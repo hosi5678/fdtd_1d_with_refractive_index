@@ -19,7 +19,7 @@
 #include "./common_include/fft.h"
 #include "./common_include/dft.h"
 #include "./common_include/getPeak.h"
-#include "./common_include/gaussian_memo.h"
+#include "./common_include/memo_gaussian.h"
 
 int main(void) {
 
@@ -97,7 +97,9 @@ int main(void) {
 
     getPeak(fft_wave,file_name,fft_length);
 
-    gaussian_memo(fft_wave);
+    printf("gaussian fft peak df=%d\n",(int)round(fft_length/(2.0*cells)));
+
+    memo_gaussian(fft_wave);
 
     free(exciteWave);
     free(fft_array);

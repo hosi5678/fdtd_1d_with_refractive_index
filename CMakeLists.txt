@@ -21,6 +21,7 @@ set(excitation_mode "gaussian" CACHE STRING "Excitation mode: gaussian or sin")
 # angular Frequency Number を設定
 set(angular_frequency_num "455" CACHE INTERNAL "angular frequency number")
 
+
 # excitation_mode に応じてサブディレクトリと実行ファイルを追加
 # gaussianの場合
 if(excitation_mode STREQUAL "gaussian")
@@ -38,6 +39,10 @@ elseif(excitation_mode STREQUAL "sin")
 else()
     message("Invalid excitation_mode specified. Use 'gaussian' or 'sin'.")
 endif()
+
+# common sourceの付加
+add_subdirectory(./common_src)
+target_link_libraries(main fdtd1d_common_lib)
 
 # # sub directoryの指定
 # add_subdirectory(./fdtd1d_gaussian)
