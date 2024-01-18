@@ -60,6 +60,11 @@ void gaussian_memo(const double *fft_wave){
             // write here
             fprintf(fp,"date:%s\n",now_time);
             fprintf(fp,"gaussian pulse\n");
+
+            fprintf(fp,"dimension=%d\n",dimension);
+
+            fprintf(fp,"df(Nsample/(2*cells))=%f\n",fft_length/(2.0*cells));
+
             fprintf(fp,"cells=%d\n",cells);
 
             fprintf(fp,"time margin=%f\n",time_margin);

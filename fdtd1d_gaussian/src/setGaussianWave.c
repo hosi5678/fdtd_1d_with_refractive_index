@@ -9,6 +9,7 @@
 #include "../../common_include/checkAlloc1DDouble.h"
 #include "../../common_include/getFilePath.h"
 #include "../../common_include/fft.h"
+#include "../../common_include/dft.h"
 
 double *setGaussianWave(int length){
 

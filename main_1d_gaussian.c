@@ -17,6 +17,7 @@
 #include "./common_include/set_ey_timestep_csv.h"
 #include "./common_include/set1DDoubleCSV_Column.h"
 #include "./common_include/fft.h"
+#include "./common_include/dft.h"
 #include "./common_include/getPeak.h"
 #include "./common_include/gaussian_memo.h"
 

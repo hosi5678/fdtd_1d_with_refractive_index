@@ -10,7 +10,7 @@
 #include "../../common_include/set1DDoubleCSV_Column.h"
 #include "../../common_include/getPeak.h"
 
-void dft(const double *srcWave,char * src_file_name,int length){
+const double *dft(const double *srcWave,char * src_file_name,int length){
 
     double *wave;
 	double *power;
@@ -42,7 +42,6 @@ void dft(const double *srcWave,char * src_file_name,int length){
     }
 
     set1DDoubleCSV_Column(power,src_file_name,length/2);
-    // getPeak(power,"./csv_files/get_peak_dft.csv",length/2);
 
     printf("dft calculation end..\n");
 
@@ -52,5 +51,7 @@ void dft(const double *srcWave,char * src_file_name,int length){
 
     free(wave);
     free(power);
+
+    return power;
 
 }
