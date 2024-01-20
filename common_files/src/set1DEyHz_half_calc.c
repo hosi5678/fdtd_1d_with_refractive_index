@@ -54,11 +54,11 @@ const double * const *set1DEyHz_half_calc(
         double J;
 
         for ( int x = 1; x < excite_point ; x++ ) {
-            if(x==excite_point) {
-                J=src_J[time];
-            }else{
-                J=0.0;
-            }
+            // if(x==excite_point) {
+            //     J=src_J[time];
+            // }else{
+            //     J=0.0;
+            // }
 
             ey[x]=coef1[x]*ey[x]-coef2[x]*(hz[x]-hz[x-1]);
         }
@@ -66,8 +66,7 @@ const double * const *set1DEyHz_half_calc(
         int x=excite_point;
         ey[x]=coef1[x]*ey[x]-coef2[x]*(hz[x]-hz[x-1])-coef3[x]*src_J[time];
 
-
-        for (int x = excite_point+1 ; x < x_length-1 ; x++){
+        for (int x = excite_point+1 ; x < x_length-1 ; x++ ) {
             ey[x]=ey[x_length-1-x];
         }
 
