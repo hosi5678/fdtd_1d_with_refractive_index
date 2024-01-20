@@ -8,18 +8,19 @@
 #include <stdbool.h>
 
 // 定数の設定
-#include "./common_include/common_parameter.h"
-#include "./common_include/checkAlloc1DDouble.h"
-#include "./common_include/getFilePath.h"
-#include "./common_include/setGaussianWave.h"
-#include "./common_include/set1DEyHz.h"
-#include "./common_include/setEtyCSV.h"
-#include "./common_include/set_ey_timestep_csv.h"
-#include "./common_include/set1DDoubleCSV_Column.h"
-#include "./common_include/fft.h"
-#include "./common_include/dft.h"
-#include "./common_include/getPeak.h"
-#include "./common_include/memo_gaussian.h"
+#include "./common_files/include/common_parameter.h"
+#include "./common_files/include/checkAlloc1DDouble.h"
+#include "./common_files/include/getFilePath.h"
+#include "./common_files/include/setGaussianWave.h"
+#include "./common_files/include/set1DEyHz.h"
+#include "./common_files/include/set1DEyHz_half_calc.h"
+#include "./common_files/include/setEtyCSV.h"
+#include "./common_files/include/set_ey_timestep_csv.h"
+#include "./common_files/include/set1DDoubleCSV_Column.h"
+#include "./common_files/include/fft.h"
+#include "./common_files/include/dft.h"
+#include "./common_files/include/getPeak.h"
+#include "./common_files/include/memo_gaussian.h"
 
 int main(void) {
 
@@ -54,7 +55,7 @@ int main(void) {
     exciteWave=setGaussianWave(calculation_timestep);
 
     // 1 dimensional fdtd calculation
-    ety_const_2d_plane=set1DEyHz(
+    ety_const_2d_plane=set1DEyHz_half_calc(
        cells,
        calculation_timestep,
        exciteWave,

@@ -1,12 +1,13 @@
 # CMakeのバージョン指定
 cmake_minimum_required(VERSION 3.5)
 
-#プロジェクトの指定と言語の指定
-project(fdtd1d_main LANGUAGES C)
-
 # CMakeのキャッシュ内にコンパイラのパスを設定
 # C++の場合は LANGUAGES CXX を指定して同様に設定する。
 set(CMAKE_C_COMPILER /usr/bin/gcc-11 CACHE FILEPATH "C Compiler")
+
+#プロジェクトの指定と言語の指定
+project(fdtd1d_main LANGUAGES C)
+
 
 # buildの種類を"Debug"に指定する。
 set(CMAKE_BUILD_TYPE "Debug")
@@ -41,7 +42,7 @@ else()
 endif()
 
 # common sourceの付加
-add_subdirectory(./common_src)
+add_subdirectory(./common_files)
 target_link_libraries(main fdtd1d_common_lib)
 
 # # sub directoryの指定

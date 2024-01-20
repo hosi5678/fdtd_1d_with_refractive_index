@@ -8,14 +8,14 @@
 #include <stdbool.h>
 
 // 定数の設定
-#include "./common_include/common_parameter.h"
-#include "./common_include/init2DdoublePlane.h"
-#include "./common_include/getFilePath.h"
-#include "./common_include/setSinWave.h"
-#include "./common_include/set1DEyHz.h"
-#include "./common_include/setEtyCSV.h"
-#include "./common_include/set_ey_timestep_csv.h"
-#include "./common_include/memo_sinwave.h"
+#include "./common_files/include/common_parameter.h"
+#include "./common_files/include/init2DdoublePlane.h"
+#include "./common_files/include/getFilePath.h"
+#include "./common_files/include/setSinWave.h"
+#include "./common_files/include/set1DEyHz.h"
+#include "./common_files/include/setEtyCSV.h"
+#include "./common_files/include/set_ey_timestep_csv.h"
+#include "./common_files/include/memo_sinwave.h"
 
 int main(int argc,char **argv) {
 

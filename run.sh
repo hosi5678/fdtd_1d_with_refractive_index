@@ -81,10 +81,14 @@ if [ -d "$directory" ]; then
 
    cd "$directory"
 
+   touch "dummy.mp4"
+
    rm *.mp4
 
 else
    mkdir "$directory"
+   
+   touch "dummy.mp4"
 
 fi
 

@@ -3,13 +3,13 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "../../common_include/common_parameter.h"
-#include "../../common_include/checkAlloc1DDouble.h"
-#include "../../common_include/setSinWave.h"
-#include "../../common_include/set1DDoubleCSV_Column.h"
-#include "../../common_include/getFilePath.h"
-#include "../../common_include/fft.h"
-#include "../../common_include/getPeak.h"
+#include "../../common_files/include/common_parameter.h"
+#include "../../common_files/include/checkAlloc1DDouble.h"
+#include "../../common_files/include/setSinWave.h"
+#include "../../common_files/include/set1DDoubleCSV_Column.h"
+#include "../../common_files/include/getFilePath.h"
+#include "../../common_files/include/fft.h"
+#include "../../common_files/include/getPeak.h"
 
 double *setSinWave(int angular_frequency_num,int length){
 

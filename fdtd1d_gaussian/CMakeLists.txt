@@ -11,7 +11,7 @@ file(GLOB_RECURSE SOURCES "./src/*.c")
 add_library(fdtd1d_lib_gaussian STATIC ${SOURCES})
 
 # include files(header files)をtargetに付加
-target_include_directories(fdtd1d_lib_gaussian INTERFACE ../common_include)
+target_include_directories(fdtd1d_lib_gaussian INTERFACE ./include)
 
 # math.hをtargetに付加
 target_link_libraries(fdtd1d_lib_gaussian m)

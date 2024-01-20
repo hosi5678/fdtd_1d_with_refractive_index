@@ -8,8 +8,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "../../common_include/common_parameter.h"
-#include "../../common_include/getPeak.h"
+
+#include "../../common_files/include/common_parameter.h"
+#include "../../common_files/include/getPeak.h"
+
 #include "../include/memo_gaussian.h"
 
 void memo_gaussian(const double *fft_wave){
