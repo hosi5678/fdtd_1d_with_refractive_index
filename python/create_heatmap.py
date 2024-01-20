@@ -11,11 +11,20 @@ file_path=str(sys.argv[1])
 
 df=pd.read_csv(file_path)
 
+print(file_path+"was founded.")
+print(str(len(df))+"rows founded.")
+
+start = int(input("input start datum number."))
+end = int(input("input end datum number."))
+
+df=df.iloc[start:end];
+
 fig=plt.figure(figsize=(1080/80,1080/80),dpi=80)
 
 fig.suptitle('Heatmap',fontsize=20)
 
-sns.heatmap(df,cmap='coolwarm',cbar=True,center=0.0)
+heatmap=sns.heatmap(df,cmap='coolwarm',cbar=True,center=0.0)
+heatmap.invert_yaxis()
 
 plt.savefig("./graph/heatmap.png")
 

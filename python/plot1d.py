@@ -20,7 +20,6 @@ file_name_without_extension, extension = os.path.splitext(file_name_with_extensi
 # file名の表示
 print(file_path+" has readed.")
 
-
 # CSVファイルをPandasのSeriesに読み込む　
 df = pd.read_csv(file_path,header=None,names=["x","data"] )
 
