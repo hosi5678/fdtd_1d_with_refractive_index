@@ -24,13 +24,11 @@ timestep = count_csv_files(csv_dir)
 
 print(str(timestep)+" csv files were found.")
 
-max=0.00050 #sin
-max=0.000010378528949
-max=0.000121823326702
+max=0.000010360083626
 
 min=-max
 
-timestep=300
+timestep=500
 
 for i in range(timestep):
     

@@ -17,27 +17,27 @@ const double *frequency_analysis(
 
     FILE *fp;
 
-    double *vec;
+    // double *vec;
     const double *ret_vec;
 
     char *file_name;
 
     int flag=check_2_n_power(length);
 
-    vec=checkAlloc1DDouble("in frequency analysis.",length);
+    // vec=checkAlloc1DDouble("in frequency analysis.",length);
 
-    for(int i=0;i<length;i++){
-        vec[i]=srcVec[i];
-    }
+    // for(int i=0;i<length;i++){
+    //     vec[i]=srcVec[i];
+    // }
 
     if(flag==0) {
         printf("use fft.\n");
-        ret_vec=fft(vec,src_file_name,length);
+        ret_vec=fft(srcVec,src_file_name,length);
     } else {
         printf("use dft.\n");
-        ret_vec=dft(vec , src_file_name, fft_length);
+        ret_vec=dft(srcVec , src_file_name, fft_length);
     }
 
-        free(vec);
+        // free(srcVec);
         return ret_vec;
 }

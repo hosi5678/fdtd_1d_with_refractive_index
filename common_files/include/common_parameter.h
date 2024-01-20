@@ -19,11 +19,11 @@
 
 #define pml_layer_number 50
 
-#define fft_length 4096
+#define fft_length 16384
 
 #define cells 55
 
-#define gaussianPeaktimePosition 10
+#define gaussianPeaktimePosition 64
 
 #define gaussian_alpha 0.05
 

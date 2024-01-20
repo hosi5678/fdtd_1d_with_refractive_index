@@ -33,13 +33,13 @@ double *setGaussianWave(int length){
     file_path=getFilePath(csv_dir,"before_fft_input_gaussian_time",csv_extension);
 
     // #pragma omp parallel for
-    set1DDoubleCSV_Column(gaussian,file_path,length);
+    set1DDoubleCSV_Column(gaussian,file_path,2*gaussianPeaktimePosition);
 
     // for fft
     double *fft_gaussian;
-    fft_gaussian=checkAlloc1DDouble("in gaussian wave setting",fft_length);
+    fft_gaussian=checkAlloc1DDouble("in gaussian wave setting",2*gaussianPeaktimePosition);
 
-    for(int time=0;time<fft_length;time++){
+    for(int time=0;time<2*gaussianPeaktimePosition;time++){
         fft_gaussian[time]=gaussian[time];
     }
 
@@ -47,7 +47,7 @@ double *setGaussianWave(int length){
 
     // fft(fft_gaussian,file_path,fft_length);
 
-    frequency_analysis(fft_gaussian,file_path,length);
+    frequency_analysis(fft_gaussian,file_path,2*gaussianPeaktimePosition);
 
     return gaussian;
 

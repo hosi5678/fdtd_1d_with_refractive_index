@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# clear
+tree > tree.txt
 
 directory="./csv_files"
 
@@ -114,5 +114,3 @@ cd ./build
 ninja -t clean
 ninja
 cd ..
-
-tree > tree.txt
