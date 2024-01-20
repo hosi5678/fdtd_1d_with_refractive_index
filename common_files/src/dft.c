@@ -10,7 +10,7 @@
 #include "../include/set1DDoubleCSV_Column.h"
 #include "../include/getPeak.h"
 
-const double *dft(const double *srcWave,char * src_file_name,int length){
+const double *dft(const double *srcWave,const char * src_file_name,int length){
 
     double *wave;
 	double *power;

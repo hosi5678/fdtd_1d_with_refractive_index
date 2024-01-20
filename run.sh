@@ -114,3 +114,5 @@ cd ./build
 ninja -t clean
 ninja
 cd ..
+
+tree > tree.txt

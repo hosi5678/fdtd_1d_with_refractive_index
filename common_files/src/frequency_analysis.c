@@ -7,41 +7,37 @@
 #include "../include/fft.h"
 #include "../include/dft.h"
 #include "../include/checkAlloc1DDouble.h"
+#include "../include/check_2_n_power.h"
 
-void frequency_analysis(double const *const *srcVec,char *file_name,int point,
-int fft_start,int length) {
+const double *frequency_analysis(
+    const double *srcVec,
+    const char *src_file_name,
+    int length
+) {
 
     FILE *fp;
 
     double *vec;
+    const double *ret_vec;
+
+    char *file_name;
+
+    int flag=check_2_n_power(length);
 
     vec=checkAlloc1DDouble("in frequency analysis.",length);
 
-    for(int time=fft_start;time<fft_start+length;time++){
-
-        for (int x=0 ; x<cells ; x++ ) {
-
-            if( x == point ){
-                vec[time]=srcVec[time][x];
-            }
-        }
-
+    for(int i=0;i<length;i++){
+        vec[i]=srcVec[i];
     }
 
-    int check=fft_length;
-    int flag=0;
-
-        while ( check > 1) {
-            if ( check%2 ==1 ) flag++;
-                check>>=1;
-        }
-
-       if (flag > 0) {
-            printf("flag=%d\n" , flag);
-            printf("use dft.\n");
-            dft(vec , file_name, fft_length);
-        } else {
-            printf("use fft.\n");
-            fft(vec , file_name, fft_length);
-        }
+    if(flag==0) {
+        printf("use fft.\n");
+        ret_vec=fft(vec,src_file_name,length);
+    } else {
+        printf("use dft.\n");
+        ret_vec=dft(vec , src_file_name, fft_length);
     }
+
+        free(vec);
+        return ret_vec;
+}

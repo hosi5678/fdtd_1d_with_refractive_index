@@ -18,7 +18,7 @@
 #include "../include/getPeak.h"
 #include "../include/getFilePath.h"
 
-const double *fft(const double *srcWave,const char *src_file_name,int length){
+const double *fft(const double *srcWave, const char *src_file_name,int length){
 
 	static double *wave;
 	time_t start_clock,end_clock;

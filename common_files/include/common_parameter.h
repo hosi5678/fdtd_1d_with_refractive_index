@@ -19,7 +19,7 @@
 
 #define pml_layer_number 50
 
-#define fft_length 16384
+#define fft_length 4096
 
 #define cells 55
 

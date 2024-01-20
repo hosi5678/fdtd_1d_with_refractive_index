@@ -7,6 +7,7 @@
 #include "../../common_files/include/set1DDoubleCSV_Column.h"
 #include "../../common_files/include/checkAlloc1DDouble.h"
 #include "../../common_files/include/getFilePath.h"
+#include "../../common_files/include/frequency_analysis.h"
 #include "../../common_files/include/fft.h"
 #include "../../common_files/include/dft.h"
 
@@ -44,7 +45,9 @@ double *setGaussianWave(int length){
 
     file_path=getFilePath(csv_dir,"after_fft_gaussian_freq",csv_extension);
 
-    fft(fft_gaussian,file_path,fft_length);
+    // fft(fft_gaussian,file_path,fft_length);
+
+    frequency_analysis(fft_gaussian,file_path,length);
 
     return gaussian;
 

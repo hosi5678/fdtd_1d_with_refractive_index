@@ -20,6 +20,7 @@
 #include "./common_files/include/fft.h"
 #include "./common_files/include/dft.h"
 #include "./common_files/include/getPeak.h"
+#include "./common_files/include/frequency_analysis.h"
 #include "./common_files/include/memo_gaussian.h"
 
 int main(void) {
@@ -92,13 +93,13 @@ int main(void) {
 
     file_name=getFilePath(csv_dir,"after_fft_eyt_freq",csv_extension);
 
-    const double *fft_wave=fft(fft_array,file_name,fft_length);
+    const double *fft_wave=frequency_analysis(fft_array,file_name,fft_length);
 
     file_name=getFilePath(csv_dir,"getPeak_of_fft",csv_extension);
 
     getPeak(fft_wave,file_name,fft_length);
 
-    printf("gaussian fft peak df=%d\n",(int)round(fft_length/(2.0*cells)));
+    printf("(main) gaussian fft peak df=%d\n",(int)round(fft_length/(2.0*cells)));
 
     memo_gaussian(fft_wave);
 

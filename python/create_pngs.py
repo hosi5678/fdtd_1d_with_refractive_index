@@ -26,10 +26,11 @@ print(str(timestep)+" csv files were found.")
 
 max=0.00050 #sin
 max=0.000010378528949
+max=0.000121823326702
 
 min=-max
 
-# timestep=300
+timestep=300
 
 for i in range(timestep):
     
