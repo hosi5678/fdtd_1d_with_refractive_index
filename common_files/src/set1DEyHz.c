@@ -20,7 +20,10 @@ const double * const *set1DEyHz(
     int time_length,
     double *src_J,
     int excite_point,
-    double dt
+    double dt,
+    double *ey_max,
+    double *ey_min
+
 
 ) {
 
@@ -43,9 +46,6 @@ const double * const *set1DEyHz(
     hz=checkAlloc1DDouble("hz calloc",x_length-1);
 
     double coef4=dt/(u0*dx);
-
-    double ey_max=0.0;
-    double ey_min=0.0;
 
     double **ety_2d_plane;
 
@@ -72,8 +72,8 @@ const double * const *set1DEyHz(
 
         for(int x=0;x<x_length;x++){
             ety_2d_plane[time][x]=ey[x];
-            if(ey[x]>ey_max) ey_max=ey[x];
-            if(ey_min>ey[x]) ey_min=ey[x];
+            if(ey[x]>*ey_max) *ey_max=ey[x];
+            if(*ey_min>ey[x]) *ey_min=ey[x];
         }
 
         symmetryCheck(ey,x_length,time);
@@ -81,20 +81,17 @@ const double * const *set1DEyHz(
 
     } // time-loop
 
-    printf("(ey max)(x1.1)  ey max=%.15f\n",ey_max*1.1);
-    printf("(ey min)(x1.1)  ey min=%.15f\n",ey_min*1.1);
-
-    
+    printf("(ey max)(x1.1)  ey max=%.15f\n",*ey_max*1.1);
+    printf("(ey min)(x1.1)  ey min=%.15f\n",*ey_min*1.1);
 
     double *ey_range=checkAlloc1DDouble("in ey range.",2);
-    ey_range[0]=ey_max*1.1;
-    ey_range[1]=ey_min*1.1;
+    ey_range[0]=*ey_max*1.1;
+    ey_range[1]=*ey_min*1.1;
 
     char *file_path;
     file_path=getFilePath(csv_dir,"ey_range",csv_extension);
 
     set1DDoubleCSV_Column(ey_range,file_path,2);
-
 
     free(eps);
     free(sigma);
