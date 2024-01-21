@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "../include/common_parameter.h"
+#include "../include/get_dt.h"
 #include "../include/init2DdoublePlane.h"
 #include "../include/symmetryCheck.h"
 #include "../include/antisymmetryCheck.h"
@@ -20,7 +21,6 @@ const double * const *set1DEyHz_half_calc(
     int time_length,
     double *src_J,
     int excite_point,
-    double dt,
     double *ey_max,
     double *ey_min
 
@@ -34,9 +34,9 @@ const double * const *set1DEyHz_half_calc(
     eps=setEps(x_length);
     sigma=setSigma(x_length);
 
-    coef1=setCoef1(eps,sigma,dt,x_length);
-    coef2=setCoef2(eps,sigma,dt,x_length);
-    coef3=setCoef3(eps,sigma,dt,x_length);
+    coef1=setCoef1(eps,sigma,x_length);
+    coef2=setCoef2(eps,sigma,x_length);
+    coef3=setCoef3(eps,sigma,x_length);
 
         // ey initialize
     ey=checkAlloc1DDouble("ey calloc",x_length);
@@ -44,7 +44,7 @@ const double * const *set1DEyHz_half_calc(
     // hz initialize
     hz=checkAlloc1DDouble("hz calloc",x_length-1);
 
-    double coef4=dt/(u0*dx);
+    double coef4=get_dt()/(u0*dx);
 
     double **ety_2d_plane;
 

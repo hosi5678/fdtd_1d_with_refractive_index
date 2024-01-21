@@ -4,12 +4,13 @@
 #include "../include/common_parameter.h"
 #include "../include/checkAlloc1DDouble.h"
 #include "../include/setCoef2.h"
+#include "../include/get_dt.h"
 
-double *setCoef2(double *eps,double *sigma,double dt,int x_length){
+double *setCoef2(double *eps,double *sigma,int x_length){
 
     double *coef2;
 
-    dt=(dx/light_speed)*time_margin;
+    double dt=get_dt();
 
     coef2=checkAlloc1DDouble("coef2",x_length);
 

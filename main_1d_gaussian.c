@@ -31,8 +31,6 @@ int main(void) {
 
     start_clock = clock();
 
-    double dt =get_dt();
-
     double const *const *ety_const_2d_plane;
     double *exciteWave;
 
@@ -65,7 +63,6 @@ int main(void) {
        calculation_timestep,
        exciteWave,
        excite_point,
-       dt,
        &ey_max,
        &ey_min
     );

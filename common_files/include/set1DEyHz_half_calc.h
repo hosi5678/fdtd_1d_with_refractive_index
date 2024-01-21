@@ -6,7 +6,6 @@ const double * const *set1DEyHz_half_calc(
     int time_length,
     double *src_J,
     int excite_point,
-    double dt,
     double *ey_max,
     double *ey_min
 
