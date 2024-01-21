@@ -7,7 +7,7 @@
 void symmetryCheck(const double *vec,int length,int time){
 
     int half_length;
-    half_length=(int)(cells-1)/2;
+    half_length=(int)(length-1)/2;
 
     for(int x=0;x<half_length;x++){
 

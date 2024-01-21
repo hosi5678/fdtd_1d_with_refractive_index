@@ -50,7 +50,7 @@ const double * const *set1DEyHz_half_calc(
 
     ety_2d_plane=init2DdoublePlane(time_length,x_length);
 
-    for (int time=0; time < time_length; time++) {
+    for ( int time=0; time < time_length; time++ ) {
 
         double J;
 

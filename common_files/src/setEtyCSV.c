@@ -10,7 +10,11 @@
 #include "../include/common_parameter.h"
 #include "../include/setEtyCSV.h"
 
-void setEtyCSV(double const *const *ety_2d_plane, char *src_file_name, int length) {
+void setEtyCSV(
+    double const *const *ety_2d_plane, 
+    char *src_file_name, 
+    int time_length,
+    int x_length) {
 
     FILE *fp;
 
@@ -42,18 +46,18 @@ void setEtyCSV(double const *const *ety_2d_plane, char *src_file_name, int lengt
             // write here
 
             // x軸の書き込み
-            for (int x = 0; x < cells; x++) {
-                if (x == cells - 1) {
+            for (int x = 0; x < x_length; x++) {
+                if (x == x_length - 1) {
                     fprintf(fp, "%d\n", x);
                 } else {
                     fprintf(fp, "%d,", x);
                 }
             }
 
-            for (int time = 0; time < length; time++) {
+            for (int time = 0; time < time_length; time++) {
                 fprintf(fp, "%d,", time);  // timestepの書き込み
-                for (int x = 0; x < cells; x++) {
-                    if (x == cells - 1) {
+                for (int x = 0; x < x_length; x++) {
+                    if (x == x_length - 1) {
                         fprintf(fp, "%.20f\n", ety_2d_plane[time][x]);
                     } else {
                         fprintf(fp, "%.20f,", ety_2d_plane[time][x]);

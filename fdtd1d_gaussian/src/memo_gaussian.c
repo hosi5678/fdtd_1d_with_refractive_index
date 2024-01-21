@@ -2,23 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-
+#include <math.h>
 
 #include "../../common_files/include/common_parameter.h"
 #include "../../common_files/include/getPeak.h"
+#include "../../common_files/include/get_dt.h"
 
 #include "../include/memo_gaussian.h"
 
-void memo_gaussian(const int *peak,double *ey_max,double *ey_min){
+void memo_gaussian(
+    const int *peak,
+    double *ey_max,
+    double *ey_min,
+    int x_length,
+    int time_length){
 
    int now_time_len,file_name_len;
    int fd,option,pmode;
-
 
    file_name_len=strlen("./memos/gaussian_memo_2024_01_14_Wed_17h_25min_00sec.txt");
    now_time_len=strlen("2024_01_14_Wed_17h_25min_00sec");
@@ -65,14 +69,14 @@ void memo_gaussian(const int *peak,double *ey_max,double *ey_min){
 
             fprintf(fp,"dimension=%d\n",dimension);
 
-            fprintf(fp,"df(Nsample/(2*cells))=%f\n",fft_length/(2.0*cells));
+            fprintf(fp,"df(Nsample/(2*x_length))=%d\n",(int)round(fft_length/(2.0*x_length)));
 
-            fprintf(fp,"cells=%d\n",cells);
+            fprintf(fp,"x_length=%d\n",x_length);
 
             fprintf(fp,"time margin=%f\n",time_margin);
 
-            fprintf(fp,"total_calc_time=%d\n",2*gaussianPeaktimePosition+cells+fft_length);
-            fprintf(fp,"fft_start_time=%d\n",2*gaussianPeaktimePosition+cells);
+            fprintf(fp,"total_calc_time=%d\n",2*gaussianPeaktimePosition+x_length+fft_length);
+            fprintf(fp,"fft_start_time=%d\n",2*gaussianPeaktimePosition +x_length);
             fprintf(fp,"fft_length=%d\n",fft_length);
             fprintf(fp,"fft peak number=%d\n",fft_peak_number);
 
@@ -83,7 +87,7 @@ void memo_gaussian(const int *peak,double *ey_max,double *ey_min){
 
             fprintf(fp,"light speed=%f\n",light_speed);
 
-            double dt=dx*time_margin/light_speed;
+            double dt=get_dt();
 
             fprintf(fp,"dt=%.40f\n",dt);
 

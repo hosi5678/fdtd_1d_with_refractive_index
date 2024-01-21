@@ -1,11 +1,9 @@
-// copyright xxxx
+// copyright kenicni hoshi hosi5678@gmail.com Copyright free.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <omp.h>
 #include <time.h>
 #include <math.h>
-#include <stdbool.h>
 
 // 定数の設定
 #include "./common_files/include/common_parameter.h"

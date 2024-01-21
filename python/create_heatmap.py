@@ -14,8 +14,8 @@ df=pd.read_csv(file_path)
 print(file_path+"was founded.")
 print(str(len(df))+"rows founded.")
 
-start = int(input("input start datum number."))
-end = int(input("input end datum number."))
+start = int(input("input start data number."))
+end = int(input("input end data number."))
 
 df=df.iloc[start:end];
 

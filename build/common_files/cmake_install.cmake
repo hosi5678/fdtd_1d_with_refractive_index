@@ -1,4 +1,4 @@
-# Install script for directory: /home/user/project/common_files
+# Install script for directory: /home/user/1d_ref/common_files
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

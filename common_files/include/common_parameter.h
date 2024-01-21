@@ -15,13 +15,9 @@
 #define dx 25e-9 // 25e-9
 #define time_margin 1.0
 
-#define cu_sigma 64.5e6
-
-#define pml_layer_number 50
-
 #define fft_length 16384
 
-#define cells 55
+// #define cells 55
 
 #define gaussianPeaktimePosition 64
 
@@ -32,11 +28,15 @@
 /* #define angular_frequency_num 455 */
 // 152,455,759,1062
 
-#define refractive_index 3.0
+#define n_index 3.0
+#define n_air 1.000292
+#define n_glass 1.55
 
-#define air_reflactive_index 1.000292
+#define reflactive_layer 55
+#define air_layer 27
+#define pml_layer 50
 
-#define glass_reflactive_index 1.55
+#define cu_sigma 64.5e6
 
 #define fft_peak_number 15
 

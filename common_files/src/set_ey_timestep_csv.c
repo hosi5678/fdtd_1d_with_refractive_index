@@ -12,13 +12,18 @@
 #include "../include/set1DDoubleCSV_Row.h"
 #include "../include/getFilePath.h"
 
-void set_ey_timestep_csv(double const* const *ety_2d_plane,char *src_dir_path,int length){
+void set_ey_timestep_csv(
+    double const* const *ety_2d_plane,
+    char *src_dir_path,
+    int time_length,
+    int x_length
+){
 
     int file_name_path_length=strlen("./ey_timestep_cvs/ey_timestep_000000.csv");
 
     // printf("file_name_path_length=%d\n",file_name_path_length);
 
-    for(int time=0;time<length;time++){
+    for(int time=0;time<time_length;time++){
 
         FILE *fp;
         int fd,option,pmode;
@@ -49,7 +54,7 @@ void set_ey_timestep_csv(double const* const *ety_2d_plane,char *src_dir_path,in
         strcat(file_name,file_number);
         strcat(file_name,csv_extension);
 
-        set1DDoubleCSV_Row(ety_2d_plane[time],file_name,cells);
+        set1DDoubleCSV_Row(ety_2d_plane[time],file_name,x_length);
 
         // printf("file_name=%s,len=%ld\n",file_name,strlen(file_name));
         // fd=open(file_name , option , pmode);

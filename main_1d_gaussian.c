@@ -1,14 +1,13 @@
-// copyright xxxx
+// copyright kenicni hoshi hosi5678@gmail.com Copyright free.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <omp.h>
 #include <time.h>
 #include <math.h>
-#include <stdbool.h>
 
 // 定数の設定
 #include "./common_files/include/common_parameter.h"
+#include "./common_files/include/get_dt.h"
 #include "./common_files/include/checkAlloc1DDouble.h"
 #include "./common_files/include/getFilePath.h"
 #include "./common_files/include/setGaussianWave.h"
@@ -32,28 +31,29 @@ int main(void) {
 
     start_clock = clock();
 
-    double dt =(dx/(sqrt(dimension)*light_speed))*time_margin;
+    double dt =get_dt();
 
     double const *const *ety_const_2d_plane;
     double *exciteWave;
 
     char *file_name;
 
-    int excite_point=(cells-1)/2;
+    int x_cells=1+2*(air_layer+reflactive_layer+pml_layer);
 
-    int fft_timestep_start=2*gaussianPeaktimePosition+cells;
+    int excite_point=air_layer+reflactive_layer+pml_layer; //(cells-1)/2;
+
+    int fft_timestep_start=2*gaussianPeaktimePosition+excite_point;
     int fft_timestep_end=fft_timestep_start+fft_length;
 
     int calculation_timestep=fft_timestep_end;
 
-    printf("(main) cells=%d\n",cells);
+    printf("(main) x_cells(total)=%d\n",x_cells);
     printf("(main) fft length=%d\n",fft_length);
     printf("(main) calc timestep=%d\n",calculation_timestep);
     printf("(main) gaussian peak=%d\n",gaussianPeaktimePosition);
+    printf("(main) excite point=%d\n",excite_point);
 
-    // wave initialize
-    exciteWave=checkAlloc1DDouble("excite wave",calculation_timestep);
-
+    // gaussian wave setting
     exciteWave=setGaussianWave(calculation_timestep);
 
     double ey_max=0.0;
@@ -61,7 +61,7 @@ int main(void) {
 
     // 1 dimensional fdtd calculation
     ety_const_2d_plane=set1DEyHz_half_calc(
-       cells,
+       x_cells,
        calculation_timestep,
        exciteWave,
        excite_point,
@@ -72,9 +72,9 @@ int main(void) {
 
     file_name=getFilePath(csv_dir,"eyt_plane_2d",csv_extension);
 
-    setEtyCSV(ety_const_2d_plane,file_name,fft_timestep_end);
+    setEtyCSV(ety_const_2d_plane,file_name,fft_timestep_end,x_cells);
 
-    set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",calculation_timestep);
+    set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",calculation_timestep,x_cells);
 
     // fft calculation , array allocation
     double *fft_array=checkAlloc1DDouble("in main fft alloc",fft_length);
@@ -82,7 +82,7 @@ int main(void) {
     // data copy
     for(int time=fft_timestep_start;time<fft_timestep_start+fft_length;time++){
 
-        for(int x=0;x<cells;x++){
+        for(int x=0;x<x_cells;x++){
             if(x==excite_point){
                 fft_array[time-fft_timestep_start]=ety_const_2d_plane[time][x];
             }
@@ -91,7 +91,7 @@ int main(void) {
     }
 
     // fft_processing
-
+    // file name setting
     file_name=getFilePath(csv_dir,"before_fft_eyt_time",csv_extension);
 
     // set csv value
@@ -104,11 +104,12 @@ int main(void) {
     file_name=getFilePath(csv_dir,"getPeak_of_fft",csv_extension);
 
     const int *peak;
+
     peak=getPeak(fft_wave,file_name,fft_length);
 
-    printf("(main) gaussian fft peak df=%d\n",(int)round(fft_length/(2.0*cells)));
+    printf("(main) gaussian fft peak df=%d\n",(int)round(fft_length/(2.0*x_cells)));
 
-    memo_gaussian(peak,&ey_max,&ey_min);
+    memo_gaussian(peak,&ey_max,&ey_min,x_cells,calculation_timestep);
 
     free(exciteWave);
     free(fft_array);
