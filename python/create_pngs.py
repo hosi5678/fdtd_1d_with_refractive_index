@@ -24,11 +24,18 @@ timestep = count_csv_files(csv_dir)
 
 print(str(timestep)+" csv files were found.")
 
-max=0.000010360083626
+ey_range_file="./csv_files/ey_range.csv"
 
-min=-max
+df=pd.read_csv(ey_range_file,header=None)
 
-timestep=500
+print("ey_max="+str(df.iloc[0].max()))
+print("ey_min="+str(df.iloc[1].min()))
+
+# 最大値、最小値の取得
+max=df.iloc[0].max()
+min=df.iloc[1].min()
+
+timestep = int(input("input timestep number."))
 
 for i in range(timestep):
     

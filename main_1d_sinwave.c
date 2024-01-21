@@ -13,9 +13,11 @@
 #include "./common_files/include/getFilePath.h"
 #include "./common_files/include/setSinWave.h"
 #include "./common_files/include/set1DEyHz.h"
+#include "./common_files/include/set1DEyHz_half_calc.h"
 #include "./common_files/include/setEtyCSV.h"
 #include "./common_files/include/set_ey_timestep_csv.h"
-#include "./common_files/include/memo_sinwave.h"
+
+#include "./fdtd1d_sinwave/include/memo_sinwave.h"
 
 int main(int argc,char **argv) {
 
@@ -48,7 +50,7 @@ int main(int argc,char **argv) {
     exciteWave=setSinWave(angular_frequency_num,calculation_timestep);
 
     // 1 dimensional fdtd calculation
-    ety_const_2d_plane=set1DEyHz(
+    ety_const_2d_plane=set1DEyHz_half_calc(
         cells,
         calculation_timestep,
         exciteWave,

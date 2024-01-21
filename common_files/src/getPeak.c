@@ -3,8 +3,9 @@
 
 #include "../include/common_parameter.h"
 #include "../include/getPeak.h"
+#include "../include/checkAlloc1DInt.h"
 
-void getPeak(const double *wave,const char *src_file_name,int length){
+const int *getPeak(const double *wave,const char *src_file_name,int length){
 
     FILE *fp;
     fp=fopen(src_file_name,"w");
@@ -14,7 +15,11 @@ void getPeak(const double *wave,const char *src_file_name,int length){
         exit(1);
     }
 
-	int count=0;
+    int *peak;
+
+    peak=checkAlloc1DInt("peak",fft_peak_number);
+
+    int count=0;
 
 	for(int i=0;i<length-2;i++){
 
@@ -22,6 +27,7 @@ void getPeak(const double *wave,const char *src_file_name,int length){
 			if(count<fft_peak_number){
                     printf("%d,%.15f\n",i+1,wave[i+1]);
                     fprintf(fp,"%d,%.15e\n",i+1,wave[i+1]);
+                    peak[count]=i+1;
                 count++;
 
             }
@@ -30,5 +36,7 @@ void getPeak(const double *wave,const char *src_file_name,int length){
 	}
 
     fclose(fp);
+
+    return (const int *)peak;
 
 }

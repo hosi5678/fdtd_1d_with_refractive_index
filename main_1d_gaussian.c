@@ -21,7 +21,8 @@
 #include "./common_files/include/dft.h"
 #include "./common_files/include/getPeak.h"
 #include "./common_files/include/frequency_analysis.h"
-#include "./common_files/include/memo_gaussian.h"
+
+#include "./fdtd1d_gaussian/include/memo_gaussian.h"
 
 int main(void) {
 
@@ -55,13 +56,18 @@ int main(void) {
 
     exciteWave=setGaussianWave(calculation_timestep);
 
+    double ey_max=0.0;
+    double ey_min=0.0;
+
     // 1 dimensional fdtd calculation
     ety_const_2d_plane=set1DEyHz_half_calc(
        cells,
        calculation_timestep,
        exciteWave,
        excite_point,
-       dt
+       dt,
+       &ey_max,
+       &ey_min
     );
 
     file_name=getFilePath(csv_dir,"eyt_plane_2d",csv_extension);
@@ -97,11 +103,12 @@ int main(void) {
 
     file_name=getFilePath(csv_dir,"getPeak_of_fft",csv_extension);
 
-    getPeak(fft_wave,file_name,fft_length);
+    const int *peak;
+    peak=getPeak(fft_wave,file_name,fft_length);
 
     printf("(main) gaussian fft peak df=%d\n",(int)round(fft_length/(2.0*cells)));
 
-    memo_gaussian(fft_wave);
+    memo_gaussian(peak,&ey_max,&ey_min);
 
     free(exciteWave);
     free(fft_array);

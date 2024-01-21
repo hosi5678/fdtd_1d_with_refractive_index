@@ -12,6 +12,8 @@
 #include "../include/setCoef2.h"
 #include "../include/setCoef3.h"
 #include "../include/set1DEyHz.h"
+#include "../include/getFilePath.h"
+#include "../include/set1DDoubleCSV_Column.h"
 
 const double * const *set1DEyHz(
     int x_length,
@@ -82,6 +84,18 @@ const double * const *set1DEyHz(
     printf("(ey max)(x1.1)  ey max=%.15f\n",ey_max*1.1);
     printf("(ey min)(x1.1)  ey min=%.15f\n",ey_min*1.1);
 
+    
+
+    double *ey_range=checkAlloc1DDouble("in ey range.",2);
+    ey_range[0]=ey_max*1.1;
+    ey_range[1]=ey_min*1.1;
+
+    char *file_path;
+    file_path=getFilePath(csv_dir,"ey_range",csv_extension);
+
+    set1DDoubleCSV_Column(ey_range,file_path,2);
+
+
     free(eps);
     free(sigma);
     free(coef1);
@@ -89,6 +103,8 @@ const double * const *set1DEyHz(
     free(coef3);
     free(hz);
     free(ey);
+
+    free(ey_range);
 
     return (const double * const *)ety_2d_plane;
 

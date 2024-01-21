@@ -11,6 +11,8 @@
 #include "../include/setCoef1.h"
 #include "../include/setCoef2.h"
 #include "../include/setCoef3.h"
+#include "../include/getFilePath.h"
+#include "../include/set1DDoubleCSV_Column.h"
 #include "../include/set1DEyHz_half_calc.h"
 
 const double * const *set1DEyHz_half_calc(
@@ -18,7 +20,9 @@ const double * const *set1DEyHz_half_calc(
     int time_length,
     double *src_J,
     int excite_point,
-    double dt
+    double dt,
+    double *ey_max,
+    double *ey_min
 
 ) {
 
@@ -42,9 +46,6 @@ const double * const *set1DEyHz_half_calc(
 
     double coef4=dt/(u0*dx);
 
-    double ey_max=0.0;
-    double ey_min=0.0;
-
     double **ety_2d_plane;
 
     ety_2d_plane=init2DdoublePlane(time_length,x_length);
@@ -54,11 +55,6 @@ const double * const *set1DEyHz_half_calc(
         double J;
 
         for ( int x = 1; x < excite_point ; x++ ) {
-            // if(x==excite_point) {
-            //     J=src_J[time];
-            // }else{
-            //     J=0.0;
-            // }
 
             ey[x]=coef1[x]*ey[x]-coef2[x]*(hz[x]-hz[x-1]);
         }
@@ -70,42 +66,36 @@ const double * const *set1DEyHz_half_calc(
             ey[x]=ey[x_length-1-x];
         }
 
-
         for(int x=0;x<(x_length-1)/2;x++){
             hz[x]=hz[x]-coef4*(ey[x+1]-ey[x]);
         }
 
         for(int x=(x_length-1)/2;x<x_length-1;x++){
             hz[x]=-1.0*hz[x_length-2-x];
-            // hz[x]=hz[x]-coef4*(ey[x+1]-ey[x]);
-
         }
-
-        // for ( int x = 0 ; x < x_length - 1 ; x++ ) {
-        //     hz[x]=hz[x]-coef4*(ey[x+1]-ey[x]);
-        // }
-
-        // for ( int x=(x_length-1)/2 ; x < x_length-1 ; x++ ) {
-        //     hz[x]=-hz[(x_length-1)/2-x];
-        //     //  hz[x]=hz[x]-coef4*(ey[x+1]-ey[x]);
-
-        // }
-
 
         for(int x=0;x<x_length;x++){
             ety_2d_plane[time][x]=ey[x];
-            if(ey[x]>ey_max) ey_max=ey[x];
-            if(ey_min>ey[x]) ey_min=ey[x];
+            if(ey[x]>*ey_max) *ey_max=ey[x];
+            if(*ey_min>ey[x]) *ey_min=ey[x];
         }
-
 
         // symmetryCheck(ey,x_length,time);
         // antisymmetryCheck(hz,x_length-1,time);
 
     } // time-loop
 
-    printf("(ey max)(x1.1)  ey max=%.15f\n",ey_max*1.1);
-    printf("(ey min)(x1.1)  ey min=%.15f\n",ey_min*1.1);
+    printf("(ey max)(x1.1)  ey max=%.15f\n",*ey_max*1.1);
+    printf("(ey min)(x1.1)  ey min=%.15f\n",*ey_min*1.1);
+
+    double *ey_range=checkAlloc1DDouble("in ey range.",2);
+    ey_range[0]=*ey_max*1.1;
+    ey_range[1]=*ey_min*1.1;
+
+    char *file_path;
+    file_path=getFilePath(csv_dir,"ey_range",csv_extension);
+
+    set1DDoubleCSV_Column(ey_range,file_path,2);
 
     free(eps);
     free(sigma);
@@ -114,6 +104,8 @@ const double * const *set1DEyHz_half_calc(
     free(coef3);
     free(hz);
     free(ey);
+
+    free(ey_range);
 
     return (const double * const *)ety_2d_plane;
 

@@ -14,7 +14,7 @@
 
 #include "../include/memo_gaussian.h"
 
-void memo_gaussian(const double *fft_wave){
+void memo_gaussian(const int *peak,double *ey_max,double *ey_min){
 
    int now_time_len,file_name_len;
    int fd,option,pmode;
@@ -87,21 +87,15 @@ void memo_gaussian(const double *fft_wave){
 
             fprintf(fp,"dt=%.40f\n",dt);
 
-            fprintf(fp,"gaussian peak,amplitude\n");
+            fprintf(fp,"ey_max(x1.1)=%.20f\n",*ey_max*1.1);
+            fprintf(fp,"ey_min(x1.1)=%.20f\n",*ey_min*1.1);
 
-         	int count=0;
 
-         for(int i=0;i<fft_length/2-2;i++){
+            fprintf(fp,"gaussian peak\n");
 
-            if(fft_wave[i+1]>fft_wave[i] && fft_wave[i+1]>fft_wave[i+2]){
-               if(count<fft_peak_number){
-                        fprintf(fp,"%d,%.15e\n",i+1,fft_wave[i+1]);
-                     count++;
-               }
-
-		      }
-	      }
-
+            for (int i= 0 ; i< fft_peak_number;i++){
+                fprintf(fp,"%d\n",peak[i]);
+            }
 
             free(file_name);
             fclose(fp);
