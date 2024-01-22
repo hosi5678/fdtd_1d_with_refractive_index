@@ -1,4 +1,4 @@
-# Install script for directory: /home/user/1d_ref/fdtd1d_gaussian
+# Install script for directory: /home/user/1d_ref/fdtd1d_sinwave
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

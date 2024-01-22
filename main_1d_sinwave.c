@@ -25,8 +25,6 @@ int main(int argc,char **argv) {
 
     start_clock = clock();
 
-    double dt=(dx/(sqrt(dimension)*light_speed))*time_margin;
-
     printf("argc=%d,argv=%s\n",argc,argv[1]);
 
     const int angular_frequency_num=atoi(argv[1]);
@@ -36,33 +34,39 @@ int main(int argc,char **argv) {
 
     char *file_name;
 
-    int excite_point=(cells-1)/2;
+    int x_cells=1+2*(air_layer+reflactive_layer+pml_layer);
+
+    int excite_point=air_layer+reflactive_layer+pml_layer; //(cells-1)/2;
 
     int calculation_timestep=fft_length;
 
-    printf("(main) cells=%d\n",cells);
+    printf("(main) cells=%d\n",x_cells);
     printf("(main) calculation timestep=%d\n",calculation_timestep);
     printf("angular frequency number=%d\n",angular_frequency_num);
 
     // wave initialize
     exciteWave=setSinWave(angular_frequency_num,calculation_timestep);
 
+    double ey_max=0.0;
+    double ey_min=0.0;
+
     // 1 dimensional fdtd calculation
     ety_const_2d_plane=set1DEyHz_half_calc(
-        cells,
+        x_cells,
         calculation_timestep,
         exciteWave,
         excite_point,
-        dt
+        &ey_max,
+        &ey_min
     );
 
     file_name=getFilePath(csv_dir,"eyt_plane_2d",csv_extension);
 
-    setEtyCSV(ety_const_2d_plane,file_name,fft_length);
+    setEtyCSV(ety_const_2d_plane,file_name,fft_length,x_cells);
 
-    set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",fft_length);
+    set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",fft_length,x_cells);
 
-    memo_sinwave(angular_frequency_num);
+    memo_sinwave(angular_frequency_num,x_cells);
 
     free(exciteWave);
 

@@ -12,6 +12,8 @@
 #include "../include/setCoef1.h"
 #include "../include/setCoef2.h"
 #include "../include/setCoef3.h"
+#include "../include/setCoef4.h"
+#include "../include/setCoef5.h"
 #include "../include/getFilePath.h"
 #include "../include/set1DDoubleCSV_Column.h"
 #include "../include/set1DEyHz_half_calc.h"
@@ -27,7 +29,7 @@ const double * const *set1DEyHz_half_calc(
 ) {
 
     double *sigma,*eps;
-    double *coef1,*coef2,*coef3;
+    double *coef1,*coef2,*coef3,*coef4,*coef5;
 
     double *ey,*hz;
 
@@ -37,6 +39,12 @@ const double * const *set1DEyHz_half_calc(
     coef1=setCoef1(eps,sigma,x_length);
     coef2=setCoef2(eps,sigma,x_length);
     coef3=setCoef3(eps,sigma,x_length);
+    coef4=setCoef4(eps,x_length-1);
+    coef5=setCoef5(eps,x_length-1);
+
+    // for(int x=0;x<x_length;x++){
+    //     printf("coef2[%d]=%.15f\n",x,coef2[x]);
+    // }
 
         // ey initialize
     ey=checkAlloc1DDouble("ey calloc",x_length);
@@ -44,7 +52,9 @@ const double * const *set1DEyHz_half_calc(
     // hz initialize
     hz=checkAlloc1DDouble("hz calloc",x_length-1);
 
-    double coef4=get_dt()/(u0*dx);
+    // u0->
+    // double coef4=get_dt()/(u0*dx);
+    // printf("coef4=%.15f\n",coef4);
 
     double **ety_2d_plane;
 
@@ -60,6 +70,7 @@ const double * const *set1DEyHz_half_calc(
         }
 
         int x=excite_point;
+
         ey[x]=coef1[x]*ey[x]-coef2[x]*(hz[x]-hz[x-1])-coef3[x]*src_J[time];
 
         for (int x = excite_point+1 ; x < x_length-1 ; x++ ) {
@@ -67,7 +78,7 @@ const double * const *set1DEyHz_half_calc(
         }
 
         for(int x=0;x<(x_length-1)/2;x++){
-            hz[x]=hz[x]-coef4*(ey[x+1]-ey[x]);
+            hz[x]=coef4[x]*hz[x]-coef5[x]*(ey[x+1]-ey[x]);
         }
 
         for(int x=(x_length-1)/2;x<x_length-1;x++){
