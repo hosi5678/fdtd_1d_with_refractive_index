@@ -15,7 +15,7 @@
 #define dx 25e-9 // 25e-9
 #define time_margin 1.0
 
-#define fft_length 4096
+#define fft_length 8192
 
 #define gaussianPeaktimePosition 16
 
@@ -23,16 +23,19 @@
 
 #define pulseAmplitude 1.0
 
-/* #define angular_frequency_num 455 */
-// 152,455,759,1062
-#define n_test 1.0
-#define n_index 3.0
+#define n_vacuum 1.0
+#define n_test_3 3.0
 #define n_air 1.000292
 #define n_glass 1.55
 
-#define reflactive_layer 5
-#define air_layer 5
-#define pml_layer 15
+// for test
+// #define reflactive_layer_half_side 5
+// #define air_layer_half_side 3
+// #define pml_layer_half_side 5
+
+#define reflactive_layer_half_side 60
+#define air_layer_half_side 30
+#define pml_layer_half_side 25
 
 #define cu_sigma 64.5e6
 

@@ -36,9 +36,9 @@ int main(void) {
 
     char *file_name;
 
-    int x_cells=1+2*(air_layer+reflactive_layer+pml_layer);
+    int x_cells=1+2*(air_layer_half_side+reflactive_layer_half_side+pml_layer_half_side);
 
-    int excite_point=air_layer+reflactive_layer+pml_layer; //(cells-1)/2;
+    int excite_point=air_layer_half_side+reflactive_layer_half_side+pml_layer_half_side; //(cells-1)/2;
 
     int fft_timestep_start=2*gaussianPeaktimePosition+excite_point;
     int fft_timestep_end=fft_timestep_start+fft_length;

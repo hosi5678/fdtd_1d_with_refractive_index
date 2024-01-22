@@ -12,11 +12,11 @@ double *setSigma(int x_length){
 
     sigma=checkAlloc1DDouble("sigma",x_length);
 
-    for(int x=0;x<pml_layer;x++){
-        sigma[x]=cu_sigma*pow(((pml_layer-(double)x)/pml_layer),4.0);
+    for(int x=0;x<pml_layer_half_side;x++){
+        sigma[x]=cu_sigma*pow(((pml_layer_half_side-(double)x)/pml_layer_half_side),4.0);
     }
 
-    for(int x=pml_layer;x<x_length;x++){
+    for(int x=pml_layer_half_side;x<x_length;x++){
         sigma[x]=sigma[x_length-1-x];
     }
 

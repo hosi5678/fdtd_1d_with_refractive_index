@@ -28,19 +28,20 @@ const double * const *set1DEyHz_half_calc(
 
 ) {
 
-    double *sigma,*eps;
+    double *sigma,*eps,*eps_hz;
     double *coef1,*coef2,*coef3,*coef4,*coef5;
 
     double *ey,*hz;
 
     eps=setEps(x_length);
+    eps_hz=setEps(x_length-1);
     sigma=setSigma(x_length);
 
     coef1=setCoef1(eps,sigma,x_length);
     coef2=setCoef2(eps,sigma,x_length);
     coef3=setCoef3(eps,sigma,x_length);
-    coef4=setCoef4(eps,x_length-1);
-    coef5=setCoef5(eps,x_length-1);
+    coef4=setCoef4(eps_hz,x_length-1);
+    coef5=setCoef5(eps_hz,x_length-1);
 
     // for(int x=0;x<x_length;x++){
     //     printf("coef2[%d]=%.15f\n",x,coef2[x]);
@@ -51,10 +52,6 @@ const double * const *set1DEyHz_half_calc(
 
     // hz initialize
     hz=checkAlloc1DDouble("hz calloc",x_length-1);
-
-    // u0->
-    // double coef4=get_dt()/(u0*dx);
-    // printf("coef4=%.15f\n",coef4);
 
     double **ety_2d_plane;
 
@@ -91,8 +88,8 @@ const double * const *set1DEyHz_half_calc(
             if(*ey_min>ey[x]) *ey_min=ey[x];
         }
 
-        // symmetryCheck(ey,x_length,time);
-        // antisymmetryCheck(hz,x_length-1,time);
+        symmetryCheck(ey,x_length,time);
+        antisymmetryCheck(hz,x_length-1,time);
 
     } // time-loop
 

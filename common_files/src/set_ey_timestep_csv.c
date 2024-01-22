@@ -34,13 +34,8 @@ void set_ey_timestep_csv(
         char *dir_path=(char *)calloc(strlen(src_dir_path)+1,sizeof(char));
         strcpy(dir_path,src_dir_path);
 
-        // printf("dir_path=%s,len=%ld\n",src_dir_path,strlen(src_dir_path));
-
         char *file_path=(char *)calloc(strlen("ey_timestep_")+1,sizeof(char));
         strcpy(file_path,"ey_timestep_");
-
-        // printf("file_path=%s,len=%ld\n",file_path,strlen(file_path));
-
 
         // buffer sizeを大きく取る。char file_number[20]は解放の必要なし。
         char file_number[20];
@@ -55,45 +50,6 @@ void set_ey_timestep_csv(
         strcat(file_name,csv_extension);
 
         set1DDoubleCSV_Row(ety_2d_plane[time],file_name,x_length);
-
-        // printf("file_name=%s,len=%ld\n",file_name,strlen(file_name));
-        // fd=open(file_name , option , pmode);
-
-        // if (fd != -1) {
-        //     fp=fdopen(fd,"w");
-
-        //     if(fp != NULL){
-
-        //         // x axisの書き込み
-        //         for(int x=0;x<cells;x++){
-        //             if(x==cells-1){
-        //                 fprintf(fp,"%d\n",x);
-        //             }else{
-        //                 fprintf(fp,"%d,",x);
-        //             }
-        //         }
-
-        //         // ey値の書き込み
-        //         for(int x=0;x<cells;x++){
-        //             if(x==cells-1){
-        //                 fprintf(fp,"%.20f\n",ety_2d_plane[time][x]);
-        //             }else{
-        //                 fprintf(fp,"%.20f,",ety_2d_plane[time][x]);
-        //             }
-        //         }
-
-        //     }else{
-        //         perror("error.. cannot open the file..");
-        //         free(dir_path);
-        //         free(file_path);
-        //         free(file_name);
-        //         return;  // エラーが発生した場合は関数を終了する
-        //     }
-
-        // }else{
-        //     close(fd);
-        // }
-
 
         // fclose(fp);
         free(dir_path);
