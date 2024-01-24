@@ -15,7 +15,7 @@
 #define dx 25e-9 // 25e-9
 #define time_margin 1.0
 
-#define fft_length 8192
+#define fft_length 16384
 
 #define gaussianPeaktimePosition 16
 
@@ -34,8 +34,8 @@
 // #define pml_layer_half_side 5
 
 #define reflactive_layer_half_side 60
-#define air_layer_half_side 30
-#define pml_layer_half_side 25
+#define air_layer_half_side 60
+#define pml_layer_half_side 35
 
 #define cu_sigma 64.5e6
 

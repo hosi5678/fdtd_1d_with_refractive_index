@@ -34,9 +34,9 @@ int main(int argc,char **argv) {
 
     char *file_name;
 
-    int x_cells=1+2*(air_layer+reflactive_layer+pml_layer);
+    int x_cells=1+2*(air_layer_half_side+reflactive_layer_half_side+pml_layer_half_side);
 
-    int excite_point=air_layer+reflactive_layer+pml_layer; //(cells-1)/2;
+    int excite_point=air_layer_half_side+reflactive_layer_half_side+pml_layer_half_side; //(cells-1)/2;
 
     int calculation_timestep=fft_length;
 

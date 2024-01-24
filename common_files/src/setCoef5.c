@@ -30,9 +30,9 @@ double *setCoef5(double *eps,int x_length){
         coef5[x]=(2.0*eps[x]*dt)/((2.0*eps[x]+sigma[x]*dt)*dx*u0);
     }
 
-    for(int x=0;x<x_length;x++){
-         printf("coef5[%d]=%.10f\n",x,coef5[x]);
-    }
+    // for(int x=0;x<x_length;x++){
+    //      printf("coef5[%d]=%.10f\n",x,coef5[x]);
+    // }
 
 
     return coef5;

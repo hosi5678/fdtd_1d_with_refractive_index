@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "../include/common_parameter.h"
-#include "../include/checkAlloc1DDouble.h"
+#include "../include/checkAlloc1DInt.h"
 
 int *checkAlloc1DInt(const char *str_msg,int length){
 
