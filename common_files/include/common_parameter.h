@@ -25,6 +25,7 @@
 
 #define n_vacuum 1.0
 #define n_test_3 3.0
+#define n_test 2.55
 #define n_air 1.000292
 #define n_glass 1.55
 

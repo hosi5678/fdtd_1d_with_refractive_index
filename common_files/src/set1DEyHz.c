@@ -14,13 +14,13 @@
 #include "../include/set1DEyHz.h"
 #include "../include/getFilePath.h"
 #include "../include/set1DDoubleCSV_Column.h"
-#include "../include/get_dt.h"
 
 const double * const *set1DEyHz(
     int x_length,
     int time_length,
     double *src_J,
     int excite_point,
+    double dt,
     double *ey_max,
     double *ey_min
 
@@ -45,7 +45,7 @@ const double * const *set1DEyHz(
     // hz initialize
     hz=checkAlloc1DDouble("hz calloc",x_length-1);
 
-    double coef4=get_dt()/(u0*dx);
+    double coef4=dt/(u0*dx);
 
     double **ety_2d_plane;
 

@@ -14,10 +14,8 @@
 #include "./common_files/include/set1DEyHz.h"
 #include "./common_files/include/set1DEyHz_half_calc.h"
 #include "./common_files/include/setEtyCSV.h"
-#include "./common_files/include/set_ey_timestep_csv.h"
+#include "./common_files/include/set_vec_timestep_csv.h"
 #include "./common_files/include/set1DDoubleCSV_Column.h"
-#include "./common_files/include/fft.h"
-#include "./common_files/include/dft.h"
 #include "./common_files/include/getPeak.h"
 #include "./common_files/include/frequency_analysis.h"
 
@@ -31,7 +29,6 @@ int main(void) {
 
     start_clock = clock();
 
-    double const *const *ety_const_2d_plane;
     double *exciteWave;
 
     char *file_name;
@@ -57,8 +54,10 @@ int main(void) {
     double ey_max=0.0;
     double ey_min=0.0;
 
+    const double **ey_t_plane;
+
     // 1 dimensional fdtd calculation
-    ety_const_2d_plane=set1DEyHz_half_calc(
+    ey_t_plane=set1DEyHz_half_calc(
        x_cells,
        calculation_timestep,
        exciteWave,
@@ -67,34 +66,23 @@ int main(void) {
        &ey_min
     );
 
-    file_name=getFilePath(csv_dir,"eyt_plane_2d",csv_extension);
-
-    setEtyCSV(ety_const_2d_plane,file_name,fft_timestep_end,x_cells);
-
-    set_ey_timestep_csv(ety_const_2d_plane,"./ey_timestep_csvs/",calculation_timestep,x_cells);
-
     // fft calculation , array allocation
     double *fft_array=checkAlloc1DDouble("in main fft alloc",fft_length);
 
     // data copy
     for(int time=fft_timestep_start;time<fft_timestep_start+fft_length;time++){
-
-        for(int x=0;x<x_cells;x++){
-            if(x==excite_point){
-                fft_array[time-fft_timestep_start]=ety_const_2d_plane[time][x];
-            }
-
-        }
+        fft_array[time-fft_timestep_start]=ey_t_plane[time][excite_point];
     }
+    
 
     // fft_processing
     // file name setting
-    file_name=getFilePath(csv_dir,"before_fft_eyt_time",csv_extension);
+    file_name=getFilePath(csv_dir,"before_fft_ey_t_time",csv_extension);
 
     // set csv value
     set1DDoubleCSV_Column(fft_array,file_name,fft_length);
 
-    file_name=getFilePath(csv_dir,"after_fft_eyt_freq",csv_extension);
+    file_name=getFilePath(csv_dir,"after_fft_ey_t_freq",csv_extension);
 
     const double *fft_wave=frequency_analysis(fft_array,file_name,fft_length);
 

@@ -15,7 +15,7 @@ double *setEps(int x_length){
 
     double *eps;
 
-    double n_ref=n_glass;
+    double n_ref=n_test;
 
     printf("(in set eps) x_length=%d\n",x_length);
 

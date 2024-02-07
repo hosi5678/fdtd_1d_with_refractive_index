@@ -15,11 +15,11 @@ set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_C_FLAGS_DEBUG "-g")
 
 # 変数 excitation_mode を設定
-set(excitation_mode "gaussian" CACHE STRING "Excitation mode: gaussian or sin")
+set(excitation_mode "sin" CACHE STRING "Excitation mode: gaussian or sin")
 # set(excitation_mode "sin" CACHE STRING "Excitation mode: gaussian or sin")
 
 # angular Frequency Number を設定
-set(angular_frequency_num "175" CACHE INTERNAL "angular frequency number")
+set(angular_frequency_num "212" CACHE INTERNAL "angular frequency number")
 
 # excitation_mode に応じてサブディレクトリと実行ファイルを追加
 # gaussianの場合

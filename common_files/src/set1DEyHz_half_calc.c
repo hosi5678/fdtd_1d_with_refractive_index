@@ -16,22 +16,25 @@
 #include "../include/setCoef5.h"
 #include "../include/getFilePath.h"
 #include "../include/set1DDoubleCSV_Column.h"
+#include "../include/set_vec_timestep_csv.h"
+
 #include "../include/set1DEyHz_half_calc.h"
 
-const double * const *set1DEyHz_half_calc(
+const double **set1DEyHz_half_calc(
     int x_length,
-    int time_length,
-    double *src_J,
+    int timestep,
+    double *excite_J,
     int excite_point,
     double *ey_max,
     double *ey_min
-
 ) {
 
     double *sigma,*eps,*eps_hz;
     double *coef1,*coef2,*coef3,*coef4,*coef5;
 
     double *ey,*hz;
+
+    double **ey_t=init2DdoublePlane(timestep,x_length);
 
     eps=setEps(x_length);
     eps_hz=setEps(x_length-1);
@@ -43,32 +46,23 @@ const double * const *set1DEyHz_half_calc(
     coef4=setCoef4(eps_hz,x_length-1);
     coef5=setCoef5(eps_hz,x_length-1);
 
-    // for(int x=0;x<x_length;x++){
-    //     printf("coef2[%d]=%.15f\n",x,coef2[x]);
-    // }
-
         // ey initialize
     ey=checkAlloc1DDouble("ey calloc",x_length);
 
     // hz initialize
     hz=checkAlloc1DDouble("hz calloc",x_length-1);
 
-    double **ety_2d_plane;
+    for ( int time=0; time < timestep; time++ ) {
 
-    ety_2d_plane=init2DdoublePlane(time_length,x_length);
-
-    for ( int time=0; time < time_length; time++ ) {
-
-        double J;
-
-        for ( int x = 1; x < excite_point ; x++ ) {
-
+        // 励起点までは電流無しでの計算をする。
+        for ( int x = 1; x <= excite_point ; x++ ) {
             ey[x]=coef1[x]*ey[x]-coef2[x]*(hz[x]-hz[x-1]);
         }
 
+        // 励起点で電流項を付加する。
         int x=excite_point;
 
-        ey[x]=coef1[x]*ey[x]-coef2[x]*(hz[x]-hz[x-1])-coef3[x]*src_J[time];
+        ey[x]-=coef3[x]*excite_J[time];
 
         for (int x = excite_point+1 ; x < x_length-1 ; x++ ) {
             ey[x]=ey[x_length-1-x];
@@ -83,7 +77,6 @@ const double * const *set1DEyHz_half_calc(
         }
 
         for(int x=0;x<x_length;x++){
-            ety_2d_plane[time][x]=ey[x];
             if(ey[x]>*ey_max) *ey_max=ey[x];
             if(*ey_min>ey[x]) *ey_min=ey[x];
         }
@@ -91,7 +84,25 @@ const double * const *set1DEyHz_half_calc(
         symmetryCheck(ey,x_length,time);
         antisymmetryCheck(hz,x_length-1,time);
 
-    } // time-loop
+            set_vec_timestep_csv(
+                "./ey_timestep_csvs/",
+                "ey_timestep_",
+                ey,
+                x_length,
+                time
+            );
+
+            set_vec_timestep_csv(
+                "./hz_timestep_csvs/","hz_timestep_",
+                hz,x_length-1,
+                time
+            );
+    
+        for ( int x= 0 ; x < x_length ; x++ ){
+            ey_t[time][x]=ey[x];
+        }
+
+    } // timestep-loop
 
     printf("(ey max)(x1.1)  ey max=%.15f\n",*ey_max*1.1);
     printf("(ey min)(x1.1)  ey min=%.15f\n",*ey_min*1.1);
@@ -115,6 +126,6 @@ const double * const *set1DEyHz_half_calc(
 
     free(ey_range);
 
-    return (const double * const *)ety_2d_plane;
+    return (const double **)ey_t;
 
 }
